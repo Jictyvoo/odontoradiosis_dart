@@ -1,7 +1,9 @@
-const gnatio = {
-  "landmark": "Gnátio (Gn)",
-  "accessed_curves": ["mandíbula"],
-  "instructions": [
+import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_description.dart';
+
+const gnatio = IRoutineDescription(
+  landmark: "Gnátio (Gn)",
+  accessed_curves: ["mandíbula"],
+  instructions: [
     ["load_curve", "mandíbula", null, "curvePoints"],
     ["access_point", 8, "curvePoints", "foundedGnatio"],
     [
@@ -11,5 +13,5 @@ const gnatio = {
       {"x": "x", "y": "y"}
     ],
     ["return", "x", "y", null]
-  ]
-};
+  ],
+);

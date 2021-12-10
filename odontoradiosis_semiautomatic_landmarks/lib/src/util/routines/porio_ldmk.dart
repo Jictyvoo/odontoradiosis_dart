@@ -1,7 +1,9 @@
-const porio = {
-  "landmark": "Pório (Po)",
-  "accessed_curves": ["pório-anatômico"],
-  "instructions": [
+import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_description.dart';
+
+const porio = IRoutineDescription(
+  landmark: "Pório (Po)",
+  accessed_curves: ["pório-anatômico"],
+  instructions: [
     ["load_curve", "pório-anatômico", null, "curvePoints"],
     ["access_point", 1, "curvePoints", "p1"],
     ["access_point", 2, "curvePoints", "p2"],
@@ -23,5 +25,5 @@ const porio = {
       {"x": "x", "y": "y"}
     ],
     ["return", "x", "y", null]
-  ]
-};
+  ],
+);

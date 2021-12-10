@@ -7,6 +7,7 @@ import 'package:odontoradiosis_semiautomatic_landmarks/src/util/landmarks_manage
 import 'src/controllers/routine_executor.dart';
 import 'src/util/tracing_manager.dart';
 
+export 'src/models/routine_description.dart';
 export 'src/util/landmarks_manager.dart';
 export 'src/util/tracing_manager.dart';
 

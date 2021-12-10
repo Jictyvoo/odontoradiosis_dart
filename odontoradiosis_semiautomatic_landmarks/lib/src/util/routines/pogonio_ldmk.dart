@@ -1,7 +1,9 @@
-const pogonio = {
-  "landmark": "Pogônio (Pog)",
-  "accessed_curves": ["mandíbula", "perfil-mole"],
-  "instructions": [
+import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_description.dart';
+
+const pogonio = IRoutineDescription(
+  landmark: "Pogônio (Pog)",
+  accessed_curves: ["mandíbula", "perfil-mole"],
+  instructions: [
     ["load_curve", "mandíbula", null, "curvePoints_1"],
     ["load_curve", "perfil-mole", null, "curvePoints_2"],
     ["access_point", 19, "curvePoints_1", "p1"],
@@ -33,5 +35,5 @@ const pogonio = {
       {"x": "x", "y": "y"}
     ],
     ["return", "x", "y", null]
-  ]
-};
+  ],
+);

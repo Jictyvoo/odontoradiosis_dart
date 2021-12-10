@@ -1,7 +1,9 @@
-const b = {
-  "landmark": "Ponto pupramental (B)",
-  "accessed_curves": ["mandíbula", "perfil-mole"],
-  "instructions": [
+import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_description.dart';
+
+const b = IRoutineDescription(
+  landmark: "Ponto pupramental (B)",
+  accessed_curves: ["mandíbula", "perfil-mole"],
+  instructions: [
     ["load_curve", "mandíbula", null, "curvePoints_1"],
     ["load_curve", "perfil-mole", null, "curvePoints_2"],
     ["access_point", 18, "curvePoints_2", "perfilMolePoint"],
@@ -23,5 +25,5 @@ const b = {
     ["div", "tempX", "2", "x"],
     ["div", "tempY", "2", "y"],
     ["return", "x", "y", null]
-  ]
-};
+  ],
+);

@@ -1,7 +1,9 @@
-const proNasal = {
-  "landmark": "Pró-nasal (Pn)",
-  "accessed_curves": ["perfil-mole"],
-  "instructions": [
+import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_description.dart';
+
+const proNasal = IRoutineDescription(
+  landmark: "Pró-nasal (Pn)",
+  accessed_curves: ["perfil-mole"],
+  instructions: [
     ["load_curve", "perfil-mole", null, "curvePoints"],
     ["access_point", 4, "curvePoints", "foundedPn"],
     [
@@ -11,5 +13,5 @@ const proNasal = {
       {"x": "x", "y": "y"}
     ],
     ["return", "x", "y", null]
-  ]
-};
+  ],
+);

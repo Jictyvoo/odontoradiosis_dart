@@ -1,7 +1,9 @@
-const ena = {
-  "landmark": "Espinha nasal anterior (ENA)",
-  "accessed_curves": ["maxila"],
-  "instructions": [
+import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_description.dart';
+
+const ena = IRoutineDescription(
+  landmark: "Espinha nasal anterior (ENA)",
+  accessed_curves: ["maxila"],
+  instructions: [
     ["load_curve", "maxila", null, "curvePoints"],
     ["access_point", 7, "curvePoints", "foundedENA"],
     [
@@ -11,5 +13,5 @@ const ena = {
       {"x": "x", "y": "y"}
     ],
     ["return", "x", "y", null]
-  ]
-};
+  ],
+);

@@ -1,7 +1,9 @@
-const palatoMole = {
-  "landmark": "Palato Mole (pm)",
-  "accessed_curves": ["mandíbula", "maxila"],
-  "instructions": [
+import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_description.dart';
+
+const palatoMole = IRoutineDescription(
+  landmark: "Palato Mole (pm)",
+  accessed_curves: ["mandíbula", "maxila"],
+  instructions: [
     ["load_curve", "mandíbula", null, "curvePoints_1"],
     ["load_curve", "maxila", null, "curvePoints_2"],
     ["access_point", 4, "curvePoints_2", "maxilaPoint"],
@@ -23,5 +25,5 @@ const palatoMole = {
     ["div", "tempX", "2", "x"],
     ["div", "tempY", "2", "y"],
     ["return", "x", "y", null]
-  ]
-};
+  ],
+);

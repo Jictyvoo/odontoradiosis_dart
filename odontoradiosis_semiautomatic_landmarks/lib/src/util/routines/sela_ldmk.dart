@@ -1,7 +1,9 @@
-const sela = {
-  "landmark": "Sela (S)",
-  "accessed_curves": ["sela-túrcica"],
-  "instructions": [
+import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_description.dart';
+
+const sela = IRoutineDescription(
+  landmark: "Sela (S)",
+  accessed_curves: ["sela-túrcica"],
+  instructions: [
     ["load_curve", "sela-túrcica", null, "curvePoints"],
     ["access_point", 4, "curvePoints", "p1"],
     ["access_point", 5, "curvePoints", "p2"],
@@ -20,5 +22,5 @@ const sela = {
       {"x": "x", "y": "y"}
     ],
     ["return", "x", "y", null]
-  ]
-};
+  ],
+);

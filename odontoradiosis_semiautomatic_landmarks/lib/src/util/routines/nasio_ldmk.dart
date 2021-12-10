@@ -1,7 +1,9 @@
-const nasio = {
-  "landmark": "Násio (N)",
-  "accessed_curves": ["sutura-fronto-nasal"],
-  "instructions": [
+import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_description.dart';
+
+const nasio = IRoutineDescription(
+  landmark: "Násio (N)",
+  accessed_curves: ["sutura-fronto-nasal"],
+  instructions: [
     ["load_curve", "sutura-fronto-nasal", null, "curvePoints"],
     ["access_point", 1, "curvePoints", "foundedNasio"],
     [
@@ -11,5 +13,5 @@ const nasio = {
       {"x": "x", "y": "y"}
     ],
     ["return", "x", "y", null]
-  ]
-};
+  ],
+);

@@ -1,7 +1,9 @@
-const gonio = {
-  "landmark": "Gônio (Go)",
-  "accessed_curves": ["mandíbula"],
-  "instructions": [
+import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_description.dart';
+
+const gonio = IRoutineDescription(
+  landmark: "Gônio (Go)",
+  accessed_curves: ["mandíbula"],
+  instructions: [
     ["load_curve", "mandíbula", null, "curvePoints"],
     ["access_point", 10, "curvePoints", "firstPoint"],
     ["access_point", 11, "curvePoints", "secondPoint"],
@@ -20,5 +22,5 @@ const gonio = {
     ["add", "x1", "x2", "tempX"],
     ["div", "tempX", "2", "x"],
     ["return", "x", "y2", null]
-  ]
-};
+  ],
+);

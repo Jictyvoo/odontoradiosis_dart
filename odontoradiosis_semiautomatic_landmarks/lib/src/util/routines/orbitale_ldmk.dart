@@ -1,7 +1,9 @@
-const orbitale = {
-  "landmark": "Órbitário (Or)",
-  "accessed_curves": ["borda-póstero-inferior"],
-  "instructions": [
+import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_description.dart';
+
+const orbitale = IRoutineDescription(
+  landmark: "Órbitário (Or)",
+  accessed_curves: ["borda-póstero-inferior"],
+  instructions: [
     ["load_curve", "borda-póstero-inferior", null, "curvePoints"],
     ["access_point", 1, "curvePoints", "p1"],
     ["access_point", 3, "curvePoints", "p2"],
@@ -34,5 +36,5 @@ const orbitale = {
       {"x": "x", "y": "noY"}
     ],
     ["return", "x", "y", null]
-  ]
-};
+  ],
+);

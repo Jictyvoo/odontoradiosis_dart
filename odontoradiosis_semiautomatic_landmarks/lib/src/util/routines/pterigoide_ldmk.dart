@@ -1,7 +1,9 @@
-const pterigoide = {
-  "landmark": "Pterigóide (Pt)",
-  "accessed_curves": ["fissura-pterigomaxilar"],
-  "instructions": [
+import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_description.dart';
+
+const pterigoide = IRoutineDescription(
+  landmark: "Pterigóide (Pt)",
+  accessed_curves: ["fissura-pterigomaxilar"],
+  instructions: [
     ["load_curve", "fissura-pterigomaxilar", null, "curvePoints"],
     ["access_point", 3, "curvePoints", "p1"],
     ["access_point", 4, "curvePoints", "p2"],
@@ -24,5 +26,5 @@ const pterigoide = {
     ["add", "tempX1", "tempX2", "x"],
     ["add", "tempY1", "tempY2", "y"],
     ["return", "x", "y", null]
-  ]
-};
+  ],
+);

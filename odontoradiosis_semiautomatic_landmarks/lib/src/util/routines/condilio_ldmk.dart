@@ -1,7 +1,9 @@
-const condilio = {
-  "landmark": "Condílio (Co)",
-  "accessed_curves": ["fissura-pterigomaxilar", "pório-anatômico"],
-  "instructions": [
+import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_description.dart';
+
+const condilio = IRoutineDescription(
+  landmark: "Condílio (Co)",
+  accessed_curves: ["fissura-pterigomaxilar", "pório-anatômico"],
+  instructions: [
     ["load_curve", "fissura-pterigomaxilar", null, "curvePoints_1"],
     ["load_curve", "pório-anatômico", null, "curvePoints_2"],
     ["access_point", 2, "curvePoints_1", "pterigoMaxilaPoint"],
@@ -23,5 +25,5 @@ const condilio = {
     ["div", "tempX", "2", "x"],
     ["div", "tempY", "2", "y"],
     ["return", "x", "y", null]
-  ]
-};
+  ],
+);

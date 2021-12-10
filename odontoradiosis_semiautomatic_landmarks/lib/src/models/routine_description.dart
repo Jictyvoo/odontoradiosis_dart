@@ -6,5 +6,9 @@ class IRoutineDescription {
   final List<String> accessed_curves;
   final List<IOperation> instructions;
 
-  IRoutineDescription(this.landmark, this.accessed_curves, this.instructions);
+  const IRoutineDescription({
+    required this.landmark,
+    required this.accessed_curves,
+    required this.instructions,
+  });
 }
