@@ -72,6 +72,24 @@ abstract class ICanvasDraw {
     String strokeStyle,
   );
 
+  /// Draw a circle in selected curve with selected colors
+  /// @param {string} layerId
+  /// @param {number} x
+  /// @param {number} y
+  /// @param {number} pointRadius
+  /// @param {number} lineWidth
+  /// @param {string} fillStyle
+  /// @param {string} strokeStyle
+  void drawText(
+    String layerId,
+    double x,
+    double y,
+    String text,
+    double lineWidth,
+    String fillStyle,
+    String strokeStyle,
+  );
+
   /// @param {CanvasRenderingContext2D} context
   /// @param {number} x1
   /// @param {number} y1
