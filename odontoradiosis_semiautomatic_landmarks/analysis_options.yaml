@@ -1,0 +1,26 @@
+include: package:lints/recommended.yaml
+
+# Lint rules and documentation, see http://dart-lang.github.io/linter/lints
+linter:
+  rules:
+    - avoid_empty_else
+    - cancel_subscriptions
+    - camel_case_types
+    - hash_and_equals
+    - iterable_contains_unrelated_type
+    - list_remove_unrelated_type
+    - package_names
+    - prefer_const_constructors
+    - prefer_const_declarations
+    - prefer_final_locals
+    - public_member_api_docs
+    - sized_box_for_whitespace
+    - test_types_in_equals
+    - unnecessary_const
+    - unnecessary_new
+    - unnecessary_string_interpolations
+    - unrelated_type_equality_checks
+    - valid_regexps
+
+# Additional information about this file can be found at
+# https://dart.dev/guides/language/analysis-options
