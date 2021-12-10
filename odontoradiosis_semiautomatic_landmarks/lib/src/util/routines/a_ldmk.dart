@@ -1,0 +1,15 @@
+const a = {
+  "landmark": "Ponto subespinhal (A)",
+  "accessed_curves": ["maxila"],
+  "instructions": [
+    ["load_curve", "maxila", null, "curvePoints"],
+    ["access_point", 8, "curvePoints", "foundedA"],
+    [
+      "point_to_var",
+      "foundedA",
+      null,
+      {"x": "x", "y": "y"}
+    ],
+    ["return", "x", "y", null]
+  ]
+};

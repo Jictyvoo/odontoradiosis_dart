@@ -1,0 +1,24 @@
+const sela = {
+  "landmark": "Sela (S)",
+  "accessed_curves": ["sela-túrcica"],
+  "instructions": [
+    ["load_curve", "sela-túrcica", null, "curvePoints"],
+    ["access_point", 4, "curvePoints", "p1"],
+    ["access_point", 5, "curvePoints", "p2"],
+    ["access_point", 6, "curvePoints", "p3"],
+    ["access_point", 7, "curvePoints", "p4"],
+    [
+      "average",
+      ["p1", "p2", "p3", "p4"],
+      null,
+      "result"
+    ],
+    [
+      "point_to_var",
+      "result",
+      null,
+      {"x": "x", "y": "y"}
+    ],
+    ["return", "x", "y", null]
+  ]
+};

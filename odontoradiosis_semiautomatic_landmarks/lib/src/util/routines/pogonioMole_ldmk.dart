@@ -1,0 +1,15 @@
+const pogonioMole = {
+  "landmark": "Pogônio Mole (Pg)",
+  "accessed_curves": ["perfil-mole"],
+  "instructions": [
+    ["load_curve", "perfil-mole", null, "curvePoints"],
+    ["access_point", 19, "curvePoints", "foundedPg"],
+    [
+      "point_to_var",
+      "foundedPg",
+      null,
+      {"x": "x", "y": "y"}
+    ],
+    ["return", "x", "y", null]
+  ]
+};
