@@ -1,4 +1,4 @@
-import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
+import 'package:odontoradiosis_interfaces/src/models/types/landmark_manipulation.dart';
 
 abstract class AbsLandmarksManagement {
   void redrawLandmarks();

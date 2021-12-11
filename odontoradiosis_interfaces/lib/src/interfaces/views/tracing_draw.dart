@@ -1,4 +1,4 @@
-import 'package:odontoradiosis_interfaces/src/interfaces/controllers/curve_manipulation.dart';
+import 'package:odontoradiosis_interfaces/src/models/types/curve_manipulation.dart';
 
 import 'canvases/canvas_render_context.dart';
 

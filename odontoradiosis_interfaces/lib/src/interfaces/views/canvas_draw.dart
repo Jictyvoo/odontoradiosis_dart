@@ -1,6 +1,5 @@
-import 'package:odontoradiosis_interfaces/src/interfaces/controllers/scales_controller.dart';
-
-import '../callbacks.dart';
+import '../../models/types/callbacks.dart';
+import '../controllers/scales_controller.dart';
 import 'canvases/canvas_render_context.dart';
 import 'canvases/custom_canvas_element.dart';
 

@@ -1,5 +1,5 @@
-import 'controllers/curve_manipulation.dart';
-import 'controllers/landmark_manipulation.dart';
+import '../models/types/curve_manipulation.dart';
+import '../models/types/landmark_manipulation.dart';
 
 enum EStorageKey { BEZIER_CURVES, LANDMARKS, IMAGE_DATA }
 
