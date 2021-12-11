@@ -3,7 +3,6 @@ import 'package:odontoradiosis_semiautomatic_landmarks/src/models/2d_point_keys.
 import 'package:odontoradiosis_semiautomatic_landmarks/src/models/elements_storage.dart';
 import 'package:odontoradiosis_semiautomatic_landmarks/src/models/mutable_2d_point.dart';
 import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_description.dart';
-import 'package:odontoradiosis_semiautomatic_landmarks/src/util/landmarks_manager.dart';
 
 class RoutineExecutor {
   final IRoutineDescription _routine;

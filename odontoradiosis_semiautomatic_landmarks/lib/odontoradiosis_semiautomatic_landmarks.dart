@@ -1,25 +1,22 @@
 library odontoradiosis_semiautomatic_landmarks;
 
 import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
-import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_description.dart';
-import 'package:odontoradiosis_semiautomatic_landmarks/src/util/landmarks_manager.dart';
 
 import 'src/controllers/routine_executor.dart';
-import 'src/util/tracing_manager.dart';
+import 'src/models/routine_description.dart';
 
+// Export packages
 export 'src/models/routine_description.dart';
-export 'src/util/landmarks_manager.dart';
-export 'src/util/tracing_manager.dart';
 
 class SemiautomaticLandmarks {
-  List<IRoutineDescription> routinesDescription;
-  AbsTracingManager tracingController;
-  AbsLandmarksManagement landmarksController;
+  final List<IRoutineDescription> routinesDescription;
+  final AbsTracingManager tracingController;
+  final AbsLandmarksManagement landmarksController;
 
   /// @param {array} routinesDescription Have all json data informing all routines
   /// @param {TracingController} tracingController
   /// @param {LandmarksController} landmarksController
-  SemiautomaticLandmarks(
+  const SemiautomaticLandmarks(
     this.routinesDescription,
     this.tracingController,
     this.landmarksController,
