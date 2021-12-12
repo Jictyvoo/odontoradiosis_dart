@@ -12,6 +12,9 @@ abstract class ICanvasDraw {
   /// Change the cursor of the canvas stacks
   set canvasCursor(String newCursor);
 
+  /// Sets the rendering layer order
+  set layerOrder(Map<String, int> order);
+
   /// Returns a canvas based on it id
   /// @param {string} id
   /// @returns {HTMLCanvasElement}
