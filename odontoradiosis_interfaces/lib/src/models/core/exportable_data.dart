@@ -6,5 +6,9 @@ class IExportableData {
   final ILandmarkArray landmarks;
   final ITracingCurves curves;
 
-  const IExportableData(this.imageData, this.landmarks, this.curves);
+  const IExportableData({
+    this.imageData = '',
+    this.landmarks = const {},
+    this.curves = const {},
+  });
 }

@@ -17,7 +17,7 @@ class LandmarksController {
   LandmarksController(this.canvas, this._localRepository) : _landmarks = {};
 
   /// Returns this.landmarks
-  ILandmarkArray getLandmarks() {
+  ILandmarkArray get landmarks {
     return _landmarks;
   }
 
