@@ -4,6 +4,10 @@ import 'package:odontoradiosis_interfaces/src/interfaces/views/canvases/custom_c
 import 'package:odontoradiosis_interfaces/src/models/bidimensional_point.dart';
 
 abstract class IScalesController {
+  int get pointRadius;
+
+  IPointBidimensional get textRelativePosition;
+
   /// Calculate the scale to make canvas dynamic and returns it
   /// @param {number} valueToResize
   /// @param {boolean} isX

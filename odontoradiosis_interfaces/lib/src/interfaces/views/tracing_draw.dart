@@ -16,9 +16,9 @@ abstract class ITracingDraw {
 
   /// @param {CanvasRenderingContext2D} context
   /// @param {array} boxDimensions
-  void drawBoxVertex(CanvasRenderingContext2D context, List<int> boxDimensions);
+  void drawBoxVertex(CanvasRenderingContext2D context, List<double> boxDimensions);
 
   /// @param {string} currentCurve
   /// @param {array} boxDimensions
-  void drawCurveBox(List<int> boxDimensions);
+  void drawCurveBox(List<double> boxDimensions);
 }

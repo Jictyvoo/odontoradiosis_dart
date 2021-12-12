@@ -1,5 +1,5 @@
 import '../../models/types/callbacks.dart';
-import '../controllers/scales_controller.dart';
+import '../util/scales_controller.dart';
 import 'canvases/canvas_render_context.dart';
 import 'canvases/custom_canvas_element.dart';
 
