@@ -1,0 +1,17 @@
+name: odontoradiosis_core
+description: The core algorithm to handle Odontoradiosis logic
+version: 0.0.1
+homepage: https://github.com/jictyvoo/odontoradiosis/odontoradiosis_core
+
+environment:
+  sdk: ">=2.15.0 <3.0.0"
+
+dependencies:
+  odontoradiosis_interfaces:
+    path: ../odontoradiosis_interfaces
+
+dev_dependencies:
+  lints: ^1.0.1
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
