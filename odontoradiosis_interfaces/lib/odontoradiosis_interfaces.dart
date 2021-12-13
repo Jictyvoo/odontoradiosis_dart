@@ -5,9 +5,10 @@ export 'src/enums/canvas_layers.dart';
 
 // Controllers
 export 'src/interfaces/controllers/landmarks_manager.dart';
-export 'src/interfaces/util/scales_controller.dart';
+export 'src/interfaces/controllers/mouse_event_interaction.dart';
 export 'src/interfaces/controllers/tracing_manager.dart';
 export 'src/interfaces/repositories.dart';
+export 'src/interfaces/util/scales_controller.dart';
 
 // Views - I
 export 'src/interfaces/views/canvas_draw.dart';

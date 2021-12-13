@@ -240,7 +240,7 @@ class TracingController extends AbstractBezierController {
             relativeMouse.y <= element[subIndex + 1] + pointRadius) {
           return ICurvePointLocation(
             element: element,
-            x: subIndex.toDouble(),
+            x: subIndex,
             y: subIndex + 1,
           );
         }

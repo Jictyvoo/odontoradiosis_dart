@@ -8,6 +8,8 @@ import 'src/controllers/subcontrollers/tracing_controller.dart';
 import 'src/models/odontoradiosis_keeper.dart';
 import 'src/util/scale_manager.dart';
 
+export 'src/controllers/mouse_event_impl.dart';
+
 class CephalometricCanvasService {
   late MainController _mainController;
   late ICanvasDraw _canvasOdontoradiosis;

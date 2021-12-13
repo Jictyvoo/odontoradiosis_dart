@@ -1,11 +1,15 @@
-import 'package:odontoradiosis_interfaces/src/models/bidimensional_point.dart';
-
-class ICurvePointLocation extends IPointBidimensional {
+class ICurvePointLocation {
   final List<double> element;
+
+  /// Index of X
+  final int x;
+
+  /// Index of y
+  final int y;
 
   const ICurvePointLocation({
     required this.element,
-    required double x,
-    required double y,
-  }) : super(x, y);
+    required this.x,
+    required this.y,
+  });
 }
