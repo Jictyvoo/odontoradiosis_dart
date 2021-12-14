@@ -52,7 +52,9 @@ class CephalometricCanvasService {
       }
     }
 
-    _imageEffects = ImageEffects(_canvasOdontoradiosis);
+    _imageEffects = ImageEffects(
+      _canvasOdontoradiosis.getLayer(ICanvasLayers.BACKGROUND.value),
+    );
     _mainController = mainController;
 
     // After the initialization of the canvas, the loaded image is displayed

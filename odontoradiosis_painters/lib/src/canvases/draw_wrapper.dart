@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
 class DrawWrapper implements ICanvasDraw {
@@ -19,7 +19,6 @@ class DrawWrapper implements ICanvasDraw {
   }
 
   Path drawBezier(
-    CanvasRenderingContext2D context,
     double x1,
     double y1,
     double cx1,
@@ -69,7 +68,7 @@ class DrawWrapper implements ICanvasDraw {
     final textSpan = TextSpan(
       text: text,
       style: TextStyle(
-        color: Colors.black,
+        color: const Color(0xFF000000),
         fontSize: lineWidth,
       ),
     );
@@ -103,8 +102,11 @@ class DrawWrapper implements ICanvasDraw {
   }
 
   @override
-  void setStyle(String styleName, String newStyle) {
-    // TODO: implement setStyle
+  void setStyle(String styleName, Map<String, double> newStyle) {
+    if (styleName == 'filter') {
+      // TODO: implement setStyle crating a new class to handle matrix effects
+      // _paint.imageFilter = ui.ImageFilter.blur();
+    }
   }
 
   @override

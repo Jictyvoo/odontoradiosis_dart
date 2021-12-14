@@ -1,11 +1,19 @@
 import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
 class ImageEffects implements IEffectValues {
+  @override
   double brightness;
+
+  @override
   double contrast;
+
+  @override
   double grayscale;
+
+  @override
   double invert;
-  ILayeredCanvas canvasManager;
+
+  final ICanvasDraw? _canvasLayer;
 
   static const IEffectValues defaultValues = IEffectValues(
     brightness: 100,
@@ -14,26 +22,27 @@ class ImageEffects implements IEffectValues {
     invert: 0,
   );
 
-  ImageEffects(ILayeredCanvas canvas)
+  ImageEffects([ICanvasDraw? canvas])
       : brightness = defaultValues.brightness,
         contrast = defaultValues.contrast,
         grayscale = defaultValues.grayscale,
         invert = defaultValues.invert,
-        canvasManager = canvas;
+        _canvasLayer = canvas;
 
   /// Returns css style values
-  String getValues() {
-    final filterStyle =
-        "brightness($brightness%) contrast($contrast%) grayscale($grayscale%) invert($invert%)";
-    return filterStyle;
+  Map<String, double> getValues() {
+    return {
+      "brightness": brightness,
+      "contrast": contrast,
+      "grayscale": grayscale,
+      "invert": invert
+    };
   }
 
   /// Event function that apply read and apply effects on image
   void updateFilterValues() {
     final filterValue = getValues();
-    canvasManager
-        .getLayer(ICanvasLayers.BACKGROUND.value)
-        ?.setStyle('filter', filterValue);
+    _canvasLayer?.setStyle('filter', filterValue);
   }
 
   /// Reset all effects

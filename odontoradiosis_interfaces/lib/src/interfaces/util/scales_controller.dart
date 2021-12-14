@@ -9,10 +9,6 @@ abstract class IScalesController {
   IPointBidimensional get textRelativePosition;
 
   /// Calculate the scale to make canvas dynamic and returns it
-  /// @param {number} valueToResize
-  /// @param {boolean} isX
-  /// @param {CanvasRenderingContext2D} clientRect
-  /// @param {ClientRect} clientRect
   double dynamicCanvasScale({
     double valueToResize = 1,
     bool isX = false,
@@ -21,12 +17,9 @@ abstract class IScalesController {
   });
 
   /// Calculates all scales variables
-  /// @param {HTMLCanvasElement} canvas
   void calculateScales(HTMLCanvasElement canvas);
 
   /// Returns an object containing the relative mouse position in Canvas
-  /// @param {HTMLElement} canvas
-  /// @param {Event} point
   IPointBidimensional getMousePos(
     HTMLCanvasElement canvas,
     IPointBidimensional point,

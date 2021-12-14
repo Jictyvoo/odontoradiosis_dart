@@ -6,7 +6,7 @@ abstract class ICanvasDraw {
   IScalesController get scales;
 
   /// Apply a style to the canvas using UsefulMethods
-  void setStyle(String styleName, String newStyle);
+  void setStyle(String styleName, Map<String, double> newStyle);
 
   /// Clear canvas that have the id passed
   void clearCanvas();
