@@ -6,7 +6,7 @@ import 'subcontrollers/landmarks_controller.dart';
 import 'subcontrollers/tracing_controller.dart';
 
 class MainController {
-  ICanvasDraw canvasOdontoradiosis;
+  ILayeredCanvas canvasOdontoradiosis;
   ScaleManager scaleManager;
   TracingController tracingController;
   LandmarksController landmarksController;
@@ -21,7 +21,9 @@ class MainController {
     required TracingRepository tracingRepository,
     required LandmarkRepository landmarkRepository,
   })  : tracingController = TracingController(
-          canvasOdontoradiosis,
+          canvasOdontoradiosis.getLayer(
+            ICanvasLayers.ANATOMICAL_TRACING.value,
+          )!,
           anatomicalTracing,
           tracingRepository,
         ),

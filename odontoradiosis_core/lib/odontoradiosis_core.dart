@@ -9,10 +9,11 @@ import 'src/models/odontoradiosis_keeper.dart';
 import 'src/util/scale_manager.dart';
 
 export 'src/controllers/mouse_event_impl.dart';
+export 'src/models/data/bezier_curves.dart';
 
 class CephalometricCanvasService {
   late MainController _mainController;
-  late ICanvasDraw _canvasOdontoradiosis;
+  late ILayeredCanvas _canvasOdontoradiosis;
   late ImageEffects _imageEffects;
   final ICanvasImage _imageInfo;
   final ILocalRepository _localRepository;
@@ -31,12 +32,12 @@ class CephalometricCanvasService {
   }
 
   void init(
-    ICanvasDraw canvas,
+    ILayeredCanvas canvas,
     MainController mainController,
     ICanvasElements? canvasElements,
   ) {
-    this._canvasOdontoradiosis = canvas;
-    this._canvasOdontoradiosis.layerOrder = {
+    _canvasOdontoradiosis = canvas;
+    _canvasOdontoradiosis.layerOrder = {
       "image": 0,
       "bezier": 1,
       "landmarks": 2
@@ -63,7 +64,9 @@ class CephalometricCanvasService {
 
   void openImageOnCanvas(String imageData) {
     // Create closure to load elements after the image is loaded
-    _canvasOdontoradiosis.openImage(imageData, () {
+    _canvasOdontoradiosis
+        .getLayer(ICanvasLayers.BACKGROUND.value)
+        ?.openImage(imageData, () {
       if (_imageInfo.isFromStorage) {
         _mainController.loadAll();
       } else {
@@ -149,7 +152,7 @@ class CephalometricCanvasService {
     return _mainController.tracingController;
   }
 
-  ICanvasDraw get cephalometricCanvas {
+  ILayeredCanvas get cephalometricCanvas {
     return _mainController.canvasOdontoradiosis;
   }
 

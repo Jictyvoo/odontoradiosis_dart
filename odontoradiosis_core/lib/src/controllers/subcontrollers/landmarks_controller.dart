@@ -6,7 +6,7 @@ import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
 class LandmarksController {
   ILandmarkArray _landmarks;
-  final ICanvasDraw canvas;
+  final ILayeredCanvas canvas;
   final LandmarkRepository _localRepository;
   static final DrawningColor _color = DrawningColor(
     fill: 'red',
@@ -77,30 +77,33 @@ class LandmarksController {
     final locations = _landmarks[landmarkName];
     final readyToShowName = StringHelper.valueBetweenParenthesis(landmarkName);
     if (locations != null && readyToShowName.isNotEmpty) {
-      canvas.drawCircleCtx(
-        ICanvasLayers.LANDMARKS.value,
-        locations.x,
-        locations.y,
-        canvas.scales.pointRadius,
-        1,
-        _color.fill,
-        _color.stroke.toString(),
-      );
-      canvas.drawText(
-        ICanvasLayers.LANDMARKS.value,
-        (locations.x - canvas.scales.textRelativePosition.x).floorToDouble(),
-        (locations.y + canvas.scales.textRelativePosition.y).floorToDouble(),
-        readyToShowName.toString(),
-        1,
-        _color.fill,
-        _color.stroke.toString(),
-      );
+      final landmarkLayer = canvas.getLayer(ICanvasLayers.LANDMARKS.value);
+      if (landmarkLayer != null) {
+        landmarkLayer.drawCircle(
+          locations.x,
+          locations.y,
+          landmarkLayer.scales.pointRadius,
+          1,
+          _color.fill,
+          _color.stroke.toString(),
+        );
+        landmarkLayer.drawText(
+          (locations.x - landmarkLayer.scales.textRelativePosition.x)
+              .floorToDouble(),
+          (locations.y + landmarkLayer.scales.textRelativePosition.y)
+              .floorToDouble(),
+          readyToShowName.toString(),
+          1,
+          _color.fill,
+          _color.stroke.toString(),
+        );
+      }
     }
   }
 
   /// Redraw all landmarks
   void redrawLandmarks() {
-    canvas.clearCanvas(ICanvasLayers.LANDMARKS.value);
+    canvas.getLayer(ICanvasLayers.LANDMARKS.value)?.clearCanvas();
     for (final element in _landmarks.keys) {
       drawLandmark(element);
     }

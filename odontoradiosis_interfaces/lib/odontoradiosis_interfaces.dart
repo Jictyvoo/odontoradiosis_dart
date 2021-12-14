@@ -19,6 +19,7 @@ export 'src/interfaces/views/canvases/custom_canvas_element.dart';
 export 'src/interfaces/views/canvases/custom_client_rect.dart';
 
 // Views - II
+export 'src/interfaces/views/layered_canvas.dart';
 export 'src/interfaces/views/tracing_draw.dart';
 
 // Global Models - I

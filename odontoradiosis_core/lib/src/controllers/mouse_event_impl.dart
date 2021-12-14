@@ -7,7 +7,7 @@ import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
 class MouseEventImpl implements MouseEventInteraction {
   final TracingController _tracingController;
-  final ICanvasDraw _canvasController;
+  final ILayeredCanvas _canvasController;
   final MainController _controller;
   final OdontoradiosisKeeper _infoKeeper;
   final IScalesController _scaleManager;

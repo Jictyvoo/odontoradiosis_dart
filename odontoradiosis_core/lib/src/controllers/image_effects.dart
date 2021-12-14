@@ -5,7 +5,7 @@ class ImageEffects implements IEffectValues {
   double contrast;
   double grayscale;
   double invert;
-  ICanvasDraw canvasManager;
+  ILayeredCanvas canvasManager;
 
   static const IEffectValues defaultValues = IEffectValues(
     brightness: 100,
@@ -14,7 +14,7 @@ class ImageEffects implements IEffectValues {
     invert: 0,
   );
 
-  ImageEffects(ICanvasDraw canvas)
+  ImageEffects(ILayeredCanvas canvas)
       : brightness = defaultValues.brightness,
         contrast = defaultValues.contrast,
         grayscale = defaultValues.grayscale,
@@ -31,8 +31,9 @@ class ImageEffects implements IEffectValues {
   /// Event function that apply read and apply effects on image
   void updateFilterValues() {
     final filterValue = getValues();
-    canvasManager.setStyle(
-        ICanvasLayers.BACKGROUND.value, 'filter', filterValue);
+    canvasManager
+        .getLayer(ICanvasLayers.BACKGROUND.value)
+        ?.setStyle('filter', filterValue);
   }
 
   /// Reset all effects
