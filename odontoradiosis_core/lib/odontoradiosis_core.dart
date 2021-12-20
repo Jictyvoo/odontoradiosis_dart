@@ -5,26 +5,20 @@ import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 import 'src/controllers/image_effects.dart';
 import 'src/controllers/main_controller.dart';
 import 'src/controllers/subcontrollers/tracing_controller.dart';
-import 'src/models/odontoradiosis_keeper.dart';
-import 'src/util/scale_manager.dart';
 
 export 'src/controllers/mouse_event_impl.dart';
 export 'src/models/data/bezier_curves.dart';
 
 class CephalometricCanvasService {
   late MainController _mainController;
-  late ILayeredCanvas _canvasOdontoradiosis;
-  late ImageEffects _imageEffects;
+  final ImageEffects _imageEffects;
   final ICanvasImage _imageInfo;
   final ILocalRepository _localRepository;
-  final OdontoradiosisKeeper _infoKeeper;
-  final ScaleManager _scaleManager;
 
   CephalometricCanvasService(
-    this._infoKeeper,
-    this._scaleManager,
     this._localRepository,
-  ) : _imageInfo = ICanvasImage('') {
+  )   : _imageInfo = ICanvasImage(''),
+        _imageEffects = ImageEffects() {
     final imageData = _localRepository.get(EStorageKey.IMAGE_DATA.name);
     _imageInfo.imageData = imageData ?? '';
     _imageInfo.isLoaded = false;
@@ -34,27 +28,7 @@ class CephalometricCanvasService {
   void init(
     ILayeredCanvas canvas,
     MainController mainController,
-    ICanvasElements? canvasElements,
   ) {
-    _canvasOdontoradiosis = canvas;
-    _canvasOdontoradiosis.layerOrder = {
-      "image": 0,
-      "bezier": 1,
-      "landmarks": 2
-    };
-
-    if (canvasElements != null) {
-      for (final canvasEntry in canvasElements.entries) {
-        _canvasOdontoradiosis.addCanvasElement(
-          canvasEntry.key,
-          canvasEntry.value,
-        );
-      }
-    }
-
-    _imageEffects = ImageEffects(
-      _canvasOdontoradiosis.getLayer(ICanvasLayers.BACKGROUND.value),
-    );
     _mainController = mainController;
 
     // After the initialization of the canvas, the loaded image is displayed
@@ -65,21 +39,14 @@ class CephalometricCanvasService {
   }
 
   void openImageOnCanvas(String imageData) {
-    // Create closure to load elements after the image is loaded
-    _canvasOdontoradiosis
-        .getLayer(ICanvasLayers.BACKGROUND.value)
-        ?.openImage(imageData, () {
-      if (_imageInfo.isFromStorage) {
-        _mainController.loadAll();
-      } else {
-        _mainController.loadJsonCurve('', true);
-        _mainController.loadJsonLandmarks('', true);
-        _mainController.saveAll();
-      }
+    if (_imageInfo.isFromStorage) {
+      _mainController.loadAll();
+    } else {
+      _mainController.loadJsonCurve('', true);
+      _mainController.loadJsonLandmarks('', true);
+      _mainController.saveAll();
+    }
 
-      _mainController.tracingController.drawAllCurves();
-      _mainController.landmarksController.redrawLandmarks();
-    });
     _imageEffects.reset();
   }
 
@@ -152,10 +119,6 @@ class CephalometricCanvasService {
 
   TracingController get tracingController {
     return _mainController.tracingController;
-  }
-
-  ILayeredCanvas get cephalometricCanvas {
-    return _mainController.canvasOdontoradiosis;
   }
 
   MainController get controller {

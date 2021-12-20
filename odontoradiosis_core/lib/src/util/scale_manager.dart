@@ -1,8 +1,7 @@
-import 'package:odontoradiosis_core/src/models/data/rect_dimensions.dart';
 import 'package:odontoradiosis_core/src/models/data/scales.dart';
 import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
-class ScaleManager implements IScalesController {
+class ScaleManager {
   @override
   int pointRadius;
 
@@ -14,6 +13,7 @@ class ScaleManager implements IScalesController {
   IPointBidimensional textRelativePosition;
 
   final ScaleValues scaleDrawValue;
+  final IPointBidimensional _scales;
 
   /// Default constructor for scale manager, that sets all default scale values
   ScaleManager([
@@ -23,6 +23,7 @@ class ScaleManager implements IScalesController {
       lineWidth: 2,
       textRelativePosition: IPointBidimensional(15, 15),
     ),
+    this._scales = const IPointBidimensional(0, 0),
   ])  : pointRadius = 4,
         lineWidth = 1,
         nameScale = 10,
@@ -33,65 +34,38 @@ class ScaleManager implements IScalesController {
   double dynamicCanvasScale({
     double valueToResize = 1,
     bool isX = false,
-    required CanvasRenderingContext2D context,
-    required ClientRect clientRect,
   }) {
-    final canvasDimensions = RectDimensions(
-      width: clientRect.width,
-      height: clientRect.height,
-    );
-    final imageDimensions = RectDimensions(
-      width: context.canvas.width,
-      height: context.canvas.height,
-    );
     if (isX) {
-      return ((imageDimensions.width * valueToResize) / canvasDimensions.width);
+      return valueToResize * _scales.x;
     } else {
-      return ((imageDimensions.height * valueToResize) /
-          canvasDimensions.height);
+      return valueToResize * _scales.y;
     }
   }
 
   /// Calculates all scales variables
   @override
-  void calculateScales(HTMLCanvasElement canvas) {
-    final rect = canvas.getBoundingClientRect();
-    final context = canvas.getContext('2d');
-    final imageDimensions = RectDimensions(
-      width: context.canvas.width,
-      height: context.canvas.height,
-    );
-    final isX = imageDimensions.width > imageDimensions.height;
+  void calculateScales() {
+    final isX = _scales.x > _scales.y;
     pointRadius = dynamicCanvasScale(
       valueToResize: scaleDrawValue.pointRadius,
       isX: isX,
-      context: context,
-      clientRect: rect,
     ).toInt();
     nameScale = dynamicCanvasScale(
       valueToResize: scaleDrawValue.nameScale,
       isX: isX,
-      context: context,
-      clientRect: rect,
     );
     lineWidth = dynamicCanvasScale(
       valueToResize: scaleDrawValue.lineWidth,
       isX: isX,
-      context: context,
-      clientRect: rect,
     );
     textRelativePosition = IPointBidimensional.create(
       x: dynamicCanvasScale(
         valueToResize: scaleDrawValue.textRelativePosition.x,
         isX: isX,
-        context: context,
-        clientRect: rect,
       ),
       y: dynamicCanvasScale(
         valueToResize: scaleDrawValue.textRelativePosition.y,
         isX: isX,
-        context: context,
-        clientRect: rect,
       ),
     );
   }
@@ -99,23 +73,16 @@ class ScaleManager implements IScalesController {
   /// Returns an object containing the relative mouse position in Canvas
   @override
   IPointBidimensional getMousePos(
-    HTMLCanvasElement canvas,
     IPointBidimensional point,
   ) {
-    final rect = canvas.getBoundingClientRect();
-    final context = canvas.getContext('2d');
     return IPointBidimensional.create(
       x: dynamicCanvasScale(
-        valueToResize: point.x - rect.left,
+        valueToResize: point.x,
         isX: true,
-        context: context,
-        clientRect: rect,
       ),
       y: dynamicCanvasScale(
-        valueToResize: point.y - rect.top,
+        valueToResize: point.y,
         isX: false,
-        context: context,
-        clientRect: rect,
       ),
     );
   }

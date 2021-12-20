@@ -5,25 +5,27 @@ import 'package:odontoradiosis_core/src/models/business/tracing_curve.dart';
 import 'package:odontoradiosis_core/src/models/data/bezier_curves.dart';
 import 'package:odontoradiosis_core/src/models/data/manipulable_point.dart';
 import 'package:odontoradiosis_core/src/models/odontoradiosis_keeper.dart';
+import 'package:odontoradiosis_core/src/util/scale_manager.dart';
 import 'package:odontoradiosis_core/src/util/useful_methods.dart';
 import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
 import 'abstract_bezier_controller.dart';
 
 class TracingController extends AbstractBezierController {
-  ICanvasDraw canvasOdontoradiosis;
-  ITracingDraw anatomicalTracing;
   Map<String, AnatomicalTracingCurve> bezierPoints;
   final TracingRepository _localRepository;
+  final ScaleManager _scales;
+  BoxDimensions? _boxDimensions;
+  IBezierPoints? _curvePoints;
 
   /// Constructor
   TracingController(
-    this.canvasOdontoradiosis,
-    this.anatomicalTracing,
     this._localRepository,
-  ) : bezierPoints = TracingController._bezierPoints2TracingList(
+    this._scales,
+  )   : bezierPoints = TracingController._bezierPoints2TracingList(
           DefaultBezierCurve.create(),
-        );
+        ),
+        _boxDimensions = null;
 
   static Map<String, AnatomicalTracingCurve> _bezierPoints2TracingList(
     ITracingCurves bezierPoints,
@@ -104,18 +106,18 @@ class TracingController extends AbstractBezierController {
 
   /// Call AnatomicalTracing method to draw bezierCurves
   void drawAllCurves() {
-    anatomicalTracing.clearCanvas();
-    for (final entry in bezierPoints.entries) {
-      final element = entry.value;
-      anatomicalTracing.drawCurve(element.points);
-    }
+    _curvePoints = null;
+    _boxDimensions = null;
+    // TODO: Call something to setState/redraw
   }
 
   /// Draw Curve box
   void drawCurveBox(String currentCurve, bool recalculate) {
     final tracing = getTracing(currentCurve);
     if (tracing != null) {
-      anatomicalTracing.drawCurveBox(tracing.getBoxDimensions(20, recalculate));
+      _boxDimensions = BoxDimensions.fromList(
+        tracing.getBoxDimensions(20, recalculate),
+      );
     }
   }
 
@@ -145,14 +147,14 @@ class TracingController extends AbstractBezierController {
   void drawEntireCurveBox(bool recalculate) {
     final points = _getMaxMinAllCurves(recalculate);
     final boxDimensions = UsefulMethods.calculateBoxDimensions(points);
-    anatomicalTracing.drawCurveBox(boxDimensions);
+    _boxDimensions = BoxDimensions.fromList(boxDimensions);
   }
 
   /// Draw all control points in a given curve
   void drawPointCircle(String curveName) {
     final tracing = getTracing(curveName);
     if (tracing != null) {
-      anatomicalTracing.drawPointCircle(tracing.points);
+      _curvePoints = tracing.points;
     }
   }
 
@@ -175,7 +177,7 @@ class TracingController extends AbstractBezierController {
       return OnBoxVertex(isOn: isOn, index: vertexIndex);
     }
 
-    final pointRadius = canvasOdontoradiosis.scales.pointRadius;
+    final pointRadius = _scales.pointRadius;
 
     var index = 0;
     for (var element in [
@@ -225,8 +227,10 @@ class TracingController extends AbstractBezierController {
 
   /// Returns the current position of the mouse if it is on a curve point
   ICurvePointLocation? verifyMouseOnCurvePoint(
-      IPointBidimensional relativeMouse, String curveName) {
-    final pointRadius = canvasOdontoradiosis.scales.pointRadius;
+    IPointBidimensional relativeMouse,
+    String curveName,
+  ) {
+    final pointRadius = _scales.pointRadius;
     final tracing = getTracing(curveName);
     if (tracing == null) {
       return null;
@@ -259,5 +263,17 @@ class TracingController extends AbstractBezierController {
     for (final curveName in bezierPoints.keys) {
       translateBezier(curveName, movement.x, movement.y);
     }
+  }
+
+  TracingDrawInfo get drawInfo {
+    final ITracingBezierList points = [];
+    for (final element in bezierPoints.values) {
+      points.add(element.points);
+    }
+    return TracingDrawInfo(
+      points,
+      boxDimensions: _boxDimensions,
+      curvePoints: _curvePoints,
+    );
   }
 }

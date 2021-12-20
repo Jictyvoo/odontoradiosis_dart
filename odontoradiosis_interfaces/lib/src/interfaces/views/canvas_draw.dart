@@ -1,10 +1,10 @@
 import '../../models/types/callbacks.dart';
-import '../util/scales_controller.dart';
 
+@Deprecated(
+  'This view will not be used anymore, now has to implement self internal views'
+  ' that know how exactly will draw it',
+)
 abstract class ICanvasDraw {
-  /// Returns the scale manager object
-  IScalesController get scales;
-
   /// Apply a style to the canvas using UsefulMethods
   void setStyle(String styleName, Map<String, double> newStyle);
 

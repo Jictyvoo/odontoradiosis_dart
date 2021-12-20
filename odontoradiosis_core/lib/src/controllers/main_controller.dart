@@ -6,7 +6,6 @@ import 'subcontrollers/landmarks_controller.dart';
 import 'subcontrollers/tracing_controller.dart';
 
 class MainController {
-  ILayeredCanvas canvasOdontoradiosis;
   ScaleManager scaleManager;
   TracingController tracingController;
   LandmarksController landmarksController;
@@ -14,22 +13,17 @@ class MainController {
 
   /// Constructor
   MainController(
-    this.canvasOdontoradiosis,
     this.scaleManager,
     this.infoKeeper, {
-    required ITracingDraw anatomicalTracing,
     required TracingRepository tracingRepository,
     required LandmarkRepository landmarkRepository,
   })  : tracingController = TracingController(
-          canvasOdontoradiosis.getLayer(
-            ICanvasLayers.ANATOMICAL_TRACING.value,
-          )!,
-          anatomicalTracing,
           tracingRepository,
+          scaleManager,
         ),
         landmarksController = LandmarksController(
-          canvasOdontoradiosis,
           landmarkRepository,
+          scaleManager,
         );
 
   /// Loads json file with landmarks location
@@ -74,11 +68,9 @@ class MainController {
   /// Change or set point location on current mouse position
   void markLandmarkPoint(String landmarkName, IPointBidimensional point) {
     if (landmarkName.isNotEmpty && landmarkName != 'Selecione') {
-      final landmarkCanvas = canvasOdontoradiosis.getCanvas(
-        ICanvasLayers.LANDMARKS.value,
+      final currentMousePosition = scaleManager.getMousePos(
+        point,
       );
-      final currentMousePosition =
-          scaleManager.getMousePos(landmarkCanvas, point);
       landmarksController.setLandmark(
           landmarkName,
           ILandmark.create(

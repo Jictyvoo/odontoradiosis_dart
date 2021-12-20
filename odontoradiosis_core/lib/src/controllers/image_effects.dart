@@ -13,8 +13,6 @@ class ImageEffects implements IEffectValues {
   @override
   double invert;
 
-  final ICanvasDraw? _canvasLayer;
-
   static const IEffectValues defaultValues = IEffectValues(
     brightness: 100,
     contrast: 100,
@@ -22,12 +20,11 @@ class ImageEffects implements IEffectValues {
     invert: 0,
   );
 
-  ImageEffects([ICanvasDraw? canvas])
+  ImageEffects()
       : brightness = defaultValues.brightness,
         contrast = defaultValues.contrast,
         grayscale = defaultValues.grayscale,
-        invert = defaultValues.invert,
-        _canvasLayer = canvas;
+        invert = defaultValues.invert;
 
   /// Returns css style values
   Map<String, double> getValues() {
@@ -39,18 +36,11 @@ class ImageEffects implements IEffectValues {
     };
   }
 
-  /// Event function that apply read and apply effects on image
-  void updateFilterValues() {
-    final filterValue = getValues();
-    _canvasLayer?.setStyle('filter', filterValue);
-  }
-
   /// Reset all effects
   void reset() {
     brightness = 100;
     contrast = 100;
     grayscale = 0;
     invert = 0;
-    updateFilterValues();
   }
 }

@@ -2,6 +2,7 @@ import 'package:odontoradiosis_core/src/controllers/main_controller.dart';
 import 'package:odontoradiosis_core/src/controllers/subcontrollers/tracing_controller.dart';
 import 'package:odontoradiosis_core/src/models/data/manipulable_point.dart';
 import 'package:odontoradiosis_core/src/models/odontoradiosis_keeper.dart';
+import 'package:odontoradiosis_core/src/util/scale_manager.dart';
 import 'package:odontoradiosis_core/src/util/useful_methods.dart';
 import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
@@ -10,7 +11,7 @@ class MouseEventImpl implements MouseEventInteraction {
   final ILayeredCanvas _canvasController;
   final MainController _controller;
   final OdontoradiosisKeeper _infoKeeper;
-  final IScalesController _scaleManager;
+  final ScaleManager _scaleManager;
 
   const MouseEventImpl(
     this._tracingController,
@@ -125,39 +126,13 @@ class MouseEventImpl implements MouseEventInteraction {
     }
   }
 
-  IPointBidimensional _getCurrentPosition(IPointBidimensional event) {
-    final referenceCanvas = _canvasController.getCanvas(
-      ICanvasLayers.LANDMARKS.value,
-    );
-    final referenceContext = _canvasController.getContext(
-      ICanvasLayers.LANDMARKS.value,
-    );
-    final referenceRect = referenceCanvas.getBoundingClientRect();
-
-    return IPointBidimensional.create(
-      x: _scaleManager.dynamicCanvasScale(
-        valueToResize: event.x,
-        isX: true,
-        context: referenceContext,
-        clientRect: referenceRect,
-      ),
-      y: _scaleManager.dynamicCanvasScale(
-        valueToResize: event.y,
-        isX: false,
-        context: referenceContext,
-        clientRect: referenceRect,
-      ),
-    );
-  }
-
   @override
-  void onMouseMove(IPointBidimensional event) {
+  void onMouseMove(final IPointBidimensional currentPosition) {
     if (_infoKeeper.isMouseDown && _infoKeeper.isCurveFunction) {
       /* do drag things */
       _canvasController.canvasCursor = 'move';
 
       final curveName = _infoKeeper.selectedOptions.curve;
-      final currentPosition = _getCurrentPosition(event);
 
       if (_infoKeeper.mousePosition.disabled) {
         _infoKeeper.mousePosition = IMousePosition(
@@ -194,9 +169,6 @@ class MouseEventImpl implements MouseEventInteraction {
         _infoKeeper.selectedOptions.isAllCurves) {
       _infoKeeper.isCurveFunction = true;
       final relativeMouse = _scaleManager.getMousePos(
-        _canvasController.getCanvas(
-          ICanvasLayers.ANATOMICAL_TRACING.value,
-        ),
         IPointBidimensional.create(x: event.x, y: event.y),
       );
       _infoKeeper.isInsideBox = _tracingController.verifyMouseInBox(

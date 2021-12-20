@@ -1,7 +1,9 @@
 import 'package:odontoradiosis_interfaces/src/models/types/curve_manipulation.dart';
 
-import 'canvases/canvas_render_context.dart';
-
+@Deprecated(
+  'This view will not be used anymore, now has to implement self internal views'
+  ' that know how exactly will draw it',
+)
 abstract class ITracingDraw {
   /// Clear the canvas.
   void clearCanvas();
@@ -16,7 +18,7 @@ abstract class ITracingDraw {
 
   /// @param {CanvasRenderingContext2D} context
   /// @param {array} boxDimensions
-  void drawBoxVertex(CanvasRenderingContext2D context, List<double> boxDimensions);
+  void drawBoxVertex(List<double> boxDimensions);
 
   /// @param {string} currentCurve
   /// @param {array} boxDimensions

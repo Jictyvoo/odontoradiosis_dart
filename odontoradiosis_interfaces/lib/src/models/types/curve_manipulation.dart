@@ -12,4 +12,6 @@ abstract class ICurveAccess {
 
 typedef ITracingCurves = Map<String, IBezierPoints>;
 
+typedef ITracingBezierList = List<IBezierPoints>;
+
 typedef ITracingList = Map<String, ICurveAccess>;

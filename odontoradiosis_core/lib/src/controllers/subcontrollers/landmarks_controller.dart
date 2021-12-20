@@ -1,20 +1,21 @@
 import 'dart:convert';
 
 import 'package:odontoradiosis_core/src/models/data/draw_color.dart';
+import 'package:odontoradiosis_core/src/util/scale_manager.dart';
 import 'package:odontoradiosis_core/src/util/string_helper.dart';
 import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
 class LandmarksController {
   ILandmarkArray _landmarks;
-  final ILayeredCanvas canvas;
   final LandmarkRepository _localRepository;
+  final ScaleManager _scales;
   static final DrawningColor _color = DrawningColor(
     fill: 'red',
     stroke: 0xFF330005,
   );
 
   /// Constructor
-  LandmarksController(this.canvas, this._localRepository) : _landmarks = {};
+  LandmarksController(this._localRepository, this._scales) : _landmarks = {};
 
   /// Returns this.landmarks
   ILandmarkArray get landmarks {
@@ -73,39 +74,38 @@ class LandmarksController {
   }
 
   /// Draw a landmark with its name
-  void drawLandmark(String landmarkName) {
-    final locations = _landmarks[landmarkName];
+  LandmarkDrawInfo? prepareLandmark(
+    String landmarkName,
+    final IPointBidimensional locations,
+  ) {
     final readyToShowName = StringHelper.valueBetweenParenthesis(landmarkName);
-    if (locations != null && readyToShowName.isNotEmpty) {
-      final landmarkLayer = canvas.getLayer(ICanvasLayers.LANDMARKS.value);
-      if (landmarkLayer != null) {
-        landmarkLayer.drawCircle(
-          locations.x,
-          locations.y,
-          landmarkLayer.scales.pointRadius,
-          1,
-          _color.fill,
-          _color.stroke.toString(),
-        );
-        landmarkLayer.drawText(
-          (locations.x - landmarkLayer.scales.textRelativePosition.x)
-              .floorToDouble(),
-          (locations.y + landmarkLayer.scales.textRelativePosition.y)
-              .floorToDouble(),
-          readyToShowName.toString(),
-          1,
-          _color.fill,
-          _color.stroke.toString(),
-        );
-      }
+    if (readyToShowName.isNotEmpty) {
+      return LandmarkDrawInfo(
+        locations,
+        _scales.pointRadius,
+        readyToShowName,
+        IPointBidimensional.create(
+          x: (locations.x - _scales.textRelativePosition.x).floorToDouble(),
+          y: (locations.y + _scales.textRelativePosition.y).floorToDouble(),
+        ),
+      );
     }
+    return null;
   }
 
   /// Redraw all landmarks
   void redrawLandmarks() {
-    canvas.getLayer(ICanvasLayers.LANDMARKS.value)?.clearCanvas();
-    for (final element in _landmarks.keys) {
-      drawLandmark(element);
+    // TODO: call setState/redraw
+  }
+
+  List<LandmarkDrawInfo> get landmarksInfo {
+    final landmarkList = <LandmarkDrawInfo>[];
+    for (final element in _landmarks.entries) {
+      final prepared = prepareLandmark(element.key, element.value);
+      if (prepared != null) {
+        landmarkList.add(prepared);
+      }
     }
+    return landmarkList;
   }
 }

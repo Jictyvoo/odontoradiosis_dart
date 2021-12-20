@@ -6,14 +6,13 @@ import 'dart:ui' as ui;
 import 'package:flutter/widgets.dart';
 import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
-class DrawWrapper implements ICanvasDraw {
+class DrawWrapper {
   final Paint _paint;
   final Canvas _canvas;
   final Size _size;
 
   DrawWrapper(this._canvas, this._size) : _paint = Paint();
 
-  @override
   void clearCanvas() {
     _canvas.drawRect(Rect.largest, Paint()..blendMode = BlendMode.clear);
   }
@@ -35,7 +34,6 @@ class DrawWrapper implements ICanvasDraw {
     return path;
   }
 
-  @override
   void drawCircle(
     double x,
     double y,
@@ -56,7 +54,6 @@ class DrawWrapper implements ICanvasDraw {
     _canvas.drawPath(path, _paint);
   }
 
-  @override
   void drawText(
     double x,
     double y,
@@ -85,7 +82,6 @@ class DrawWrapper implements ICanvasDraw {
     textPainter.paint(_canvas, offset);
   }
 
-  @override
   void openImage(String path, VoidCallbackFunction? loadFunction) {
     final imageBytes = base64Decode(path);
     ui.decodeImageFromList(imageBytes, (result) {
@@ -101,15 +97,10 @@ class DrawWrapper implements ICanvasDraw {
     });
   }
 
-  @override
   void setStyle(String styleName, Map<String, double> newStyle) {
     if (styleName == 'filter') {
       // TODO: implement setStyle crating a new class to handle matrix effects
       // _paint.imageFilter = ui.ImageFilter.blur();
     }
   }
-
-  @override
-  // TODO: implement scales
-  IScalesController get scales => throw UnimplementedError();
 }
