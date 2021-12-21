@@ -11,6 +11,7 @@ export 'src/interfaces/repositories.dart';
 
 // Views - I
 export 'src/interfaces/views/canvas_draw.dart';
+export 'src/interfaces/views/colors.dart';
 export 'src/interfaces/views/layered_canvas.dart';
 export 'src/interfaces/views/tracing_draw.dart';
 

@@ -96,11 +96,4 @@ class DrawWrapper {
       );
     });
   }
-
-  void setStyle(String styleName, Map<String, double> newStyle) {
-    if (styleName == 'filter') {
-      // TODO: implement setStyle crating a new class to handle matrix effects
-      // _paint.imageFilter = ui.ImageFilter.blur();
-    }
-  }
 }

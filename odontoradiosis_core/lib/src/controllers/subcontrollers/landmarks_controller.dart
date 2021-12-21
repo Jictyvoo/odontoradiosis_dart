@@ -9,10 +9,6 @@ class LandmarksController {
   ILandmarkArray _landmarks;
   final LandmarkRepository _localRepository;
   final ScaleManager _scales;
-  static final DrawningColor _color = DrawningColor(
-    fill: 'red',
-    stroke: 0xFF330005,
-  );
 
   /// Constructor
   LandmarksController(this._localRepository, this._scales) : _landmarks = {};
@@ -74,15 +70,14 @@ class LandmarksController {
   }
 
   /// Draw a landmark with its name
-  LandmarkDrawInfo? prepareLandmark(
+  SpecificLandmarkInfo? prepareLandmark(
     String landmarkName,
     final IPointBidimensional locations,
   ) {
     final readyToShowName = StringHelper.valueBetweenParenthesis(landmarkName);
     if (readyToShowName.isNotEmpty) {
-      return LandmarkDrawInfo(
+      return SpecificLandmarkInfo(
         locations,
-        _scales.pointRadius,
         readyToShowName,
         IPointBidimensional.create(
           x: (locations.x - _scales.textRelativePosition.x).floorToDouble(),
@@ -98,14 +93,20 @@ class LandmarksController {
     // TODO: call setState/redraw
   }
 
-  List<LandmarkDrawInfo> get landmarksInfo {
-    final landmarkList = <LandmarkDrawInfo>[];
+  LandmarkDrawInfo get landmarksInfo {
+    final landmarkList = <SpecificLandmarkInfo>[];
     for (final element in _landmarks.entries) {
       final prepared = prepareLandmark(element.key, element.value);
       if (prepared != null) {
         landmarkList.add(prepared);
       }
     }
-    return landmarkList;
+    return LandmarkDrawInfo(
+      landmarks: landmarkList,
+      color: const DrawningColor(
+        0xFF330005,
+        0xFF962626,
+      ),
+    );
   }
 }

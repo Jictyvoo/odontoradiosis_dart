@@ -31,7 +31,11 @@ class _CephalometricCanvasState extends State<CephalometricCanvas> {
       },
       child: CustomPaint(
         foregroundPainter: CephalometricPainter(
-          DefaultBezierCurve.create(),
+          TracingDrawInfo(
+            DefaultBezierCurve.create().values.toList(),
+            curvePoints: DefaultBezierCurve.create().values.toList().first,
+          ),
+          const LandmarkDrawInfo(landmarks: []),
         ),
         child: Image.network(
           '',
