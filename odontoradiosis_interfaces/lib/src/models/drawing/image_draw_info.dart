@@ -4,7 +4,7 @@ import '../effects_values.dart';
 
 class ImageDrawInfo {
   final Uint8List imageData;
-  final IEffectValues effects;
+  final IEffectValues? effects;
 
-  ImageDrawInfo(this.imageData, this.effects);
+  const ImageDrawInfo(this.imageData, [this.effects]);
 }

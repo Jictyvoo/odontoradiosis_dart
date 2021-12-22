@@ -6,6 +6,7 @@ import 'src/controllers/image_effects.dart';
 import 'src/controllers/main_controller.dart';
 import 'src/controllers/subcontrollers/tracing_controller.dart';
 
+export 'src/controllers/image_effects.dart';
 export 'src/controllers/mouse_event_impl.dart';
 export 'src/models/data/bezier_curves.dart';
 

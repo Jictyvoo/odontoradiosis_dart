@@ -10,11 +10,11 @@ class OdontoradiosisApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Odontoradiosis',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      themeMode: ThemeMode.dark,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData(primarySwatch: Colors.purple),
       home: const RadiographyPage(
-        title: 'Odontoradiosis Lateral Cephalometric',
+        title: 'Odontoradiosis',
       ),
     );
   }

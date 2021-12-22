@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:odontoradiosis_painters/odontoradiosis_painters.dart';
 
+import 'widgets/sidebar/sidebar_widget.dart';
+import 'widgets/toolbar/toolbar_widget.dart';
+
 class RadiographyPage extends StatefulWidget {
   const RadiographyPage({Key? key, required this.title}) : super(key: key);
 
@@ -16,6 +19,15 @@ class _RadiographyPageState extends State<RadiographyPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: const [
+          ToolbarWidget(),
+        ],
+      ),
+      drawer: const Drawer(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
+          child: SidebarWidget(),
+        ),
       ),
       body: const Center(
         child: CephalometricCanvas(),
