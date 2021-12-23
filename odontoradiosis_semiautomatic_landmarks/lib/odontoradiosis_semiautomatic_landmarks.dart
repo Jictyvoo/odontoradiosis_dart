@@ -13,9 +13,6 @@ class SemiautomaticLandmarks {
   final AbsTracingManager tracingController;
   final AbsLandmarksManagement landmarksController;
 
-  /// @param {array} routinesDescription Have all json data informing all routines
-  /// @param {TracingController} tracingController
-  /// @param {LandmarksController} landmarksController
   const SemiautomaticLandmarks(
     this.routinesDescription,
     this.tracingController,
