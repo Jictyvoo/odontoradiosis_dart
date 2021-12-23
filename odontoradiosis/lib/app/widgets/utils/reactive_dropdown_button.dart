@@ -20,13 +20,13 @@ class ReactiveDropdownButton<E> extends StatefulWidget {
 
   @override
   _ReactiveDropdownButtonState<E> createState() =>
-      _ReactiveDropdownButtonState<E>(initialValue);
+      _ReactiveDropdownButtonState<E>();
 }
 
 class _ReactiveDropdownButtonState<E> extends State<ReactiveDropdownButton<E>> {
   E? value;
 
-  _ReactiveDropdownButtonState(this.value);
+  _ReactiveDropdownButtonState();
 
   @override
   void initState() {

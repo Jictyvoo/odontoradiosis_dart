@@ -6,7 +6,7 @@ class SidebarController {
   double _effectBrightnessSliderValue;
   double _effectInvertSliderValue;
   double _effectGrayscaleSliderValue;
-  String selectedCurve = '';
+  String _selectedCurve = '';
 
   SidebarController()
       : _effectBrightnessSliderValue = ImageEffects.defaultValues.brightness,
@@ -30,6 +30,7 @@ class SidebarController {
 
   /// Add Curve canvas event listener
   void curveSelect(String curveName) {
+    _selectedCurve = curveName;
     /*final tracingController = this.canvasService.tracingController;
     final canvasOdontoradiosis = this.canvasService.cephalometricCanvas;
     this.infoKeeper.selectedOptions.curve = '';
@@ -58,13 +59,13 @@ class SidebarController {
   void landmarkSelect(String landmarkName) {
     /*final tracingController = this.canvasService.tracingController;
     final canvasOdontoradiosis = this.canvasService.cephalometricCanvas;
-    this.infoKeeper.selectedOptions.landmark = landmarkName;
-    if (selectedCurve.isNotEmpty) {
-      selectedCurve.writeValue('');
-      this.infoKeeper.selectedOptions.curve = '';
+    this.infoKeeper.selectedOptions.landmark = landmarkName;*/
+    if (_selectedCurve.isNotEmpty) {
+      _selectedCurve = '';
+      /*this.infoKeeper.selectedOptions.curve = '';
       tracingController.drawAllCurves();
-      canvasOdontoradiosis.canvasCursor = 'crosshair';
-    }*/
+      canvasOdontoradiosis.canvasCursor = 'crosshair';*/
+    }
   }
 
   /// Apply the effect to the canvas image only if the effect is enabled
@@ -98,6 +99,9 @@ class SidebarController {
   List<String> get supportedCurves => SupportedCephalometric.supportedCurves;
 
   List<String> get supportedLandmarks => SupportedCephalometric.supportedPoints;
+
+  String? get selectedCurve =>
+      _selectedCurve.isNotEmpty ? _selectedCurve : null;
 
   double get contrastValue {
     return _effectContrastSliderValue;
