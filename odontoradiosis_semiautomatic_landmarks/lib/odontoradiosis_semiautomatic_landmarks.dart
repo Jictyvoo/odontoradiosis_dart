@@ -27,7 +27,7 @@ class SemiautomaticLandmarks {
     for (final currentRoutine in routinesDescription) {
       // Initialize access to curves, to make sure that the routine only accesses the curves it needs
       final accessedCurves = <String, ICurveAccess>{};
-      for (final curveName in currentRoutine.accessed_curves) {
+      for (final curveName in currentRoutine.accessedCurves) {
         final tracing = tracingController.getTracing(curveName);
         if (tracing != null) {
           accessedCurves[curveName] = tracing;

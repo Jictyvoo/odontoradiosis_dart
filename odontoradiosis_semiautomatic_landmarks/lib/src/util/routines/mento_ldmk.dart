@@ -2,7 +2,7 @@ import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_descri
 
 const mento = IRoutineDescription(
   landmark: "Mento (Me)",
-  accessed_curves: ["mandíbula"],
+  accessedCurves: ["mandíbula"],
   instructions: [
     ["load_curve", "mandíbula", null, "curvePoints"],
     ["access_point", 13, "curvePoints", "firstPoint"],

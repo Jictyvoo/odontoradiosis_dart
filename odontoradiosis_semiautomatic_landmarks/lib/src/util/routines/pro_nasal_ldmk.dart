@@ -2,7 +2,7 @@ import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_descri
 
 const proNasal = IRoutineDescription(
   landmark: "Pró-nasal (Pn)",
-  accessed_curves: ["perfil-mole"],
+  accessedCurves: ["perfil-mole"],
   instructions: [
     ["load_curve", "perfil-mole", null, "curvePoints"],
     ["access_point", 4, "curvePoints", "foundedPn"],

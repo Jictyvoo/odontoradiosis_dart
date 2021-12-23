@@ -2,7 +2,7 @@ import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_descri
 
 const enp = IRoutineDescription(
   landmark: "Espinha nasal posterior (ENP)",
-  accessed_curves: ["maxila"],
+  accessedCurves: ["maxila"],
   instructions: [
     ["load_curve", "maxila", null, "curvePoints"],
     ["access_point", 4, "curvePoints", "foundedENP"],

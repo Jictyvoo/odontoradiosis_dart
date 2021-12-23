@@ -3,12 +3,12 @@ typedef IOperation = dynamic;
 
 class IRoutineDescription {
   final String landmark;
-  final List<String> accessed_curves;
+  final List<String> accessedCurves;
   final List<IOperation> instructions;
 
   const IRoutineDescription({
     required this.landmark,
-    required this.accessed_curves,
+    required this.accessedCurves,
     required this.instructions,
   });
 }

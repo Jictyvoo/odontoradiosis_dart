@@ -1,4 +1,4 @@
-import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
+import 'package:odontoradiosis_interfaces/src/interfaces/views/colors.dart';
 import 'package:odontoradiosis_interfaces/src/models/types/landmark_manipulation.dart';
 
 import '../bidimensional_point.dart';

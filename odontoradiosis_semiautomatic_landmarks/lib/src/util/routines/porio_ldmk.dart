@@ -2,7 +2,7 @@ import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_descri
 
 const porio = IRoutineDescription(
   landmark: "Pório (Po)",
-  accessed_curves: ["pório-anatômico"],
+  accessedCurves: ["pório-anatômico"],
   instructions: [
     ["load_curve", "pório-anatômico", null, "curvePoints"],
     ["access_point", 1, "curvePoints", "p1"],

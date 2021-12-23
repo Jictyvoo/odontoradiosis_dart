@@ -2,7 +2,7 @@ import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_descri
 
 const orbitale = IRoutineDescription(
   landmark: "Órbitário (Or)",
-  accessed_curves: ["borda-póstero-inferior"],
+  accessedCurves: ["borda-póstero-inferior"],
   instructions: [
     ["load_curve", "borda-póstero-inferior", null, "curvePoints"],
     ["access_point", 1, "curvePoints", "p1"],

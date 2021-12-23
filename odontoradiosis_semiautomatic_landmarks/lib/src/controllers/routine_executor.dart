@@ -1,5 +1,5 @@
 import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
-import 'package:odontoradiosis_semiautomatic_landmarks/src/models/2d_point_keys.dart';
+import 'package:odontoradiosis_semiautomatic_landmarks/src/models/two_dimensional_point_keys.dart';
 import 'package:odontoradiosis_semiautomatic_landmarks/src/models/elements_storage.dart';
 import 'package:odontoradiosis_semiautomatic_landmarks/src/models/mutable_2d_point.dart';
 import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_description.dart';

@@ -2,7 +2,7 @@ import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_descri
 
 const palatoMole = IRoutineDescription(
   landmark: "Palato Mole (pm)",
-  accessed_curves: ["mandíbula", "maxila"],
+  accessedCurves: ["mandíbula", "maxila"],
   instructions: [
     ["load_curve", "mandíbula", null, "curvePoints_1"],
     ["load_curve", "maxila", null, "curvePoints_2"],

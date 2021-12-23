@@ -2,7 +2,7 @@ import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_descri
 
 const nasio = IRoutineDescription(
   landmark: "Násio (N)",
-  accessed_curves: ["sutura-fronto-nasal"],
+  accessedCurves: ["sutura-fronto-nasal"],
   instructions: [
     ["load_curve", "sutura-fronto-nasal", null, "curvePoints"],
     ["access_point", 1, "curvePoints", "foundedNasio"],

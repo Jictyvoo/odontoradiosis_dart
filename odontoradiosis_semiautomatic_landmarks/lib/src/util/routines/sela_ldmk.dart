@@ -2,7 +2,7 @@ import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_descri
 
 const sela = IRoutineDescription(
   landmark: "Sela (S)",
-  accessed_curves: ["sela-túrcica"],
+  accessedCurves: ["sela-túrcica"],
   instructions: [
     ["load_curve", "sela-túrcica", null, "curvePoints"],
     ["access_point", 4, "curvePoints", "p1"],

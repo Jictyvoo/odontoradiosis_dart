@@ -2,7 +2,7 @@ import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_descri
 
 const pterigoide = IRoutineDescription(
   landmark: "Pterigóide (Pt)",
-  accessed_curves: ["fissura-pterigomaxilar"],
+  accessedCurves: ["fissura-pterigomaxilar"],
   instructions: [
     ["load_curve", "fissura-pterigomaxilar", null, "curvePoints"],
     ["access_point", 3, "curvePoints", "p1"],

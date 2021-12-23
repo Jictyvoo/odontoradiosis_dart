@@ -2,7 +2,7 @@ import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_descri
 
 const pogonioMole = IRoutineDescription(
   landmark: "Pogônio Mole (Pg)",
-  accessed_curves: ["perfil-mole"],
+  accessedCurves: ["perfil-mole"],
   instructions: [
     ["load_curve", "perfil-mole", null, "curvePoints"],
     ["access_point", 19, "curvePoints", "foundedPg"],

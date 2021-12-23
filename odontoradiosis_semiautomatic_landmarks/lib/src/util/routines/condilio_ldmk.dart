@@ -2,7 +2,7 @@ import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_descri
 
 const condilio = IRoutineDescription(
   landmark: "Condílio (Co)",
-  accessed_curves: ["fissura-pterigomaxilar", "pório-anatômico"],
+  accessedCurves: ["fissura-pterigomaxilar", "pório-anatômico"],
   instructions: [
     ["load_curve", "fissura-pterigomaxilar", null, "curvePoints_1"],
     ["load_curve", "pório-anatômico", null, "curvePoints_2"],

@@ -2,16 +2,10 @@ import 'package:odontoradiosis_core/src/models/data/scales.dart';
 import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
 class ScaleManager {
-  @override
   int pointRadius;
-
   double lineWidth;
-
   double nameScale;
-
-  @override
   IPointBidimensional textRelativePosition;
-
   final ScaleValues scaleDrawValue;
   final IPointBidimensional _scales;
 
@@ -30,7 +24,6 @@ class ScaleManager {
         textRelativePosition = IPointBidimensional.create(x: 15, y: 15);
 
   /// Calculate the scale to make canvas dynamic and returns it
-  @override
   double dynamicCanvasScale({
     double valueToResize = 1,
     bool isX = false,
@@ -43,7 +36,6 @@ class ScaleManager {
   }
 
   /// Calculates all scales variables
-  @override
   void calculateScales() {
     final isX = _scales.x > _scales.y;
     pointRadius = dynamicCanvasScale(
@@ -71,7 +63,6 @@ class ScaleManager {
   }
 
   /// Returns an object containing the relative mouse position in Canvas
-  @override
   IPointBidimensional getMousePos(
     IPointBidimensional point,
   ) {

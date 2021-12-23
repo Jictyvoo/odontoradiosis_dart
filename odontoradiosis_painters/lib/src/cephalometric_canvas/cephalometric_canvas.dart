@@ -5,6 +5,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:odontoradiosis_core/odontoradiosis_core.dart';
 import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
+import 'package:odontoradiosis_painters/src/canvases/test_image.dart';
 
 import 'cephalometric_painter.dart';
 

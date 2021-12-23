@@ -2,7 +2,7 @@ import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_descri
 
 const gnatio = IRoutineDescription(
   landmark: "Gnátio (Gn)",
-  accessed_curves: ["mandíbula"],
+  accessedCurves: ["mandíbula"],
   instructions: [
     ["load_curve", "mandíbula", null, "curvePoints"],
     ["access_point", 8, "curvePoints", "foundedGnatio"],

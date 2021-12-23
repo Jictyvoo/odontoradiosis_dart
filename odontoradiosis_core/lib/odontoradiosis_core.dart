@@ -127,6 +127,6 @@ class CephalometricCanvasService {
   }
 
   bool get isImageOpened {
-    return _imageInfo.imageData.length > 0;
+    return _imageInfo.imageData.isNotEmpty;
   }
 }

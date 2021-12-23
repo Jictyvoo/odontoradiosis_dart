@@ -2,7 +2,7 @@ import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_descri
 
 const b = IRoutineDescription(
   landmark: "Ponto pupramental (B)",
-  accessed_curves: ["mandíbula", "perfil-mole"],
+  accessedCurves: ["mandíbula", "perfil-mole"],
   instructions: [
     ["load_curve", "mandíbula", null, "curvePoints_1"],
     ["load_curve", "perfil-mole", null, "curvePoints_2"],
