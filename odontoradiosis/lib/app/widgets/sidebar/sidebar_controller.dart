@@ -2,17 +2,10 @@ import 'package:odontoradiosis/core/util/supported.dart';
 import 'package:odontoradiosis_core/odontoradiosis_core.dart';
 
 class SidebarController {
-  double _effectContrastSliderValue;
-  double _effectBrightnessSliderValue;
-  double _effectInvertSliderValue;
-  double _effectGrayscaleSliderValue;
   String _selectedCurve = '';
+  final CephalometricCanvasService _canvasService;
 
-  SidebarController()
-      : _effectBrightnessSliderValue = ImageEffects.defaultValues.brightness,
-        _effectContrastSliderValue = ImageEffects.defaultValues.contrast,
-        _effectInvertSliderValue = ImageEffects.defaultValues.invert,
-        _effectGrayscaleSliderValue = ImageEffects.defaultValues.grayscale;
+  SidebarController(this._canvasService);
 
   /// Normalize name
   static String _normalizeTracingName(String toNormalize) {
@@ -20,77 +13,67 @@ class SidebarController {
   }
 
   void undone() {
-    /*final effectsManager = this.canvasService.effectsManager;
+    final effectsManager = _canvasService.effectsManager;
     effectsManager.reset();
-    _effectContrastSliderValue = effectsManager.contrast;
-    _effectBrightnessSliderValue = effectsManager.brightness;
-    _effectInvertSliderValue = effectsManager.invert;
-    _effectGrayscaleSliderValue = effectsManager.grayscale;*/
+    effectsManager.contrast = effectsManager.contrast;
+    effectsManager.brightness = effectsManager.brightness;
+    effectsManager.invert = effectsManager.invert;
+    effectsManager.grayscale = effectsManager.grayscale;
   }
 
   /// Add Curve canvas event listener
   void curveSelect(String curveName) {
     _selectedCurve = curveName;
-    /*final tracingController = this.canvasService.tracingController;
-    final canvasOdontoradiosis = this.canvasService.cephalometricCanvas;
-    this.infoKeeper.selectedOptions.curve = '';
+    final tracingController = _canvasService.tracingController;
+
+    // Make it empty
+    _canvasService.controller.selectCurve('');
     tracingController.drawAllCurves();
     if (curveName != SupportedCephalometric.clearSelection) {
       final currentCurve = _normalizeTracingName(curveName);
       if (curveName == SupportedCephalometric.allCurves) {
-        this.infoKeeper.selectedOptions.curve = currentCurve;
-        this.infoKeeper.selectedOptions.isAllCurves = true;
-        canvasOdontoradiosis.canvasCursor = 'move';
-        tracingController.drawEntireCurveBox(false);
+        _canvasService.controller.selectAllCurves(curveName);
       } else {
         if (tracingController.curveExists(currentCurve)) {
-          canvasOdontoradiosis.canvasCursor = 'move';
-          this.infoKeeper.selectedOptions.curve = currentCurve;
-          this.infoKeeper.selectedOptions.isAllCurves = false;
-          tracingController.drawCurveBox(currentCurve, true);
-          tracingController.drawPointCircle(currentCurve);
+          _canvasService.controller.selectCurve(currentCurve);
         }
       }
-    } else {
-      canvasOdontoradiosis.canvasCursor = 'crosshair';
-    }*/
+    }
   }
 
   void landmarkSelect(String landmarkName) {
-    /*final tracingController = this.canvasService.tracingController;
-    final canvasOdontoradiosis = this.canvasService.cephalometricCanvas;
-    this.infoKeeper.selectedOptions.landmark = landmarkName;*/
+    final tracingController = _canvasService.tracingController;
+    _canvasService.controller.landmark = landmarkName;
     if (_selectedCurve.isNotEmpty) {
       _selectedCurve = '';
-      /*this.infoKeeper.selectedOptions.curve = '';
+      _canvasService.controller.selectCurve('');
       tracingController.drawAllCurves();
-      canvasOdontoradiosis.canvasCursor = 'crosshair';*/
     }
   }
 
   /// Apply the effect to the canvas image only if the effect is enabled
   void applyEffects(String effect, double? value) {
-    //final effectsManager = this.canvasService.effectsManager;
+    final effectsManager = _canvasService.effectsManager;
     switch (effect) {
       case "grayscale":
         //effectsManager.grayscale = value ?? 0;
-        _effectGrayscaleSliderValue = value ?? 0;
+        effectsManager.grayscale = value ?? 0;
         break;
       case "invert":
         //effectsManager.invert = value ?? 0;
-        _effectInvertSliderValue = value ?? 0;
+        effectsManager.invert = value ?? 0;
         break;
       case "brightness":
         //effectsManager.brightness = value ?? 0;
-        _effectBrightnessSliderValue = value ?? 0;
+        effectsManager.brightness = value ?? 0;
         break;
       case "contrast":
         //effectsManager.contrast = value ?? 0;
-        _effectContrastSliderValue = value ?? 0;
+        effectsManager.contrast = value ?? 0;
         break;
       default:
         //effectsManager.grayscale = value ?? 0;
-        _effectGrayscaleSliderValue = value ?? 0;
+        effectsManager.grayscale = value ?? 0;
         break;
     }
     //effectsManager.updateFilterValues();
@@ -104,18 +87,18 @@ class SidebarController {
       _selectedCurve.isNotEmpty ? _selectedCurve : null;
 
   double get contrastValue {
-    return _effectContrastSliderValue;
+    return _canvasService.effectsManager.contrast;
   }
 
   double get brightnessValue {
-    return _effectBrightnessSliderValue;
+    return _canvasService.effectsManager.brightness;
   }
 
   double get negativeValue {
-    return _effectInvertSliderValue;
+    return _canvasService.effectsManager.invert;
   }
 
   double get grayscaleValue {
-    return _effectGrayscaleSliderValue;
+    return _canvasService.effectsManager.grayscale;
   }
 }

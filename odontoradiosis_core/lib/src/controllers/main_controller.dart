@@ -10,6 +10,7 @@ class MainController {
   TracingController tracingController;
   LandmarksController landmarksController;
   OdontoradiosisKeeper infoKeeper;
+  ILayeredCanvas? layeredCanvas;
 
   /// Constructor
   MainController(
@@ -17,6 +18,7 @@ class MainController {
     this.infoKeeper, {
     required TracingRepository tracingRepository,
     required LandmarkRepository landmarkRepository,
+    this.layeredCanvas,
   })  : tracingController = TracingController(
           tracingRepository,
           scaleManager,
@@ -67,7 +69,7 @@ class MainController {
 
   /// Change or set point location on current mouse position
   void markLandmarkPoint(String landmarkName, IPointBidimensional point) {
-    if (landmarkName.isNotEmpty && landmarkName != 'Selecione') {
+    if (landmarkName.isNotEmpty) {
       final currentMousePosition = scaleManager.getMousePos(
         point,
       );
@@ -80,6 +82,30 @@ class MainController {
 
       landmarksController.saveLandmarks();
       landmarksController.redrawLandmarks();
+    }
+  }
+
+  set landmark(final String landmarkName) {
+    infoKeeper.selectedOptions.landmark = landmarkName;
+    layeredCanvas?.canvasCursor = 'crosshair';
+  }
+
+  void selectAllCurves([final String curveName = 'all']) {
+    infoKeeper.selectedOptions.curve = curveName;
+    infoKeeper.selectedOptions.isAllCurves = true;
+    layeredCanvas?.canvasCursor = 'move';
+    tracingController.drawEntireCurveBox(false);
+  }
+
+  void selectCurve(final String curveName) {
+    if (curveName.isNotEmpty) {
+      layeredCanvas?.canvasCursor = 'move';
+      infoKeeper.selectedOptions.curve = curveName;
+      infoKeeper.selectedOptions.isAllCurves = false;
+      tracingController.drawCurveBox(curveName, true);
+      tracingController.drawPointCircle(curveName);
+    } else {
+      layeredCanvas?.canvasCursor = 'crosshair';
     }
   }
 }

@@ -3,18 +3,31 @@ import 'package:odontoradiosis/app/widgets/sidebar/sidebar_controller.dart';
 import 'package:odontoradiosis/app/widgets/utils/footer.dart';
 import 'package:odontoradiosis/app/widgets/utils/reactive_dropdown_button.dart';
 import 'package:odontoradiosis/core/util/available_effects.dart';
+import 'package:odontoradiosis_core/odontoradiosis_core.dart';
 
 class SidebarWidget extends StatefulWidget {
-  const SidebarWidget({Key? key}) : super(key: key);
+  final CephalometricCanvasService _cephalometricService;
+
+  const SidebarWidget({
+    Key? key,
+    required CephalometricCanvasService cephalometricService,
+  })  : _cephalometricService = cephalometricService,
+        super(key: key);
 
   @override
   State<SidebarWidget> createState() => _SidebarWidgetState();
 }
 
 class _SidebarWidgetState extends State<SidebarWidget> {
-  final SidebarController _controller;
+  late final SidebarController _controller;
 
-  _SidebarWidgetState() : _controller = SidebarController();
+  _SidebarWidgetState();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = SidebarController(widget._cephalometricService);
+  }
 
   Widget _buildSlider(final Slider slider, final String name) {
     return DecoratedBox(
@@ -132,7 +145,11 @@ class _SidebarWidgetState extends State<SidebarWidget> {
 
       // Undone effects button
       ElevatedButton(
-        onPressed: _controller.undone,
+        onPressed: () {
+          setState(() {
+            _controller.undone();
+          });
+        },
         child: const Text('Undone'),
       ),
     ];

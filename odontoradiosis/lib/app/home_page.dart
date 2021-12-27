@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:odontoradiosis/core/infra/repositories/image_repository_impl.dart';
+import 'package:odontoradiosis_core/odontoradiosis_core.dart';
 import 'package:odontoradiosis_painters/odontoradiosis_painters.dart';
 
 import 'widgets/sidebar/sidebar_widget.dart';
@@ -23,10 +25,14 @@ class _RadiographyPageState extends State<RadiographyPage> {
           ToolbarWidget(),
         ],
       ),
-      drawer: const Drawer(
+      drawer: Drawer(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8),
-          child: SidebarWidget(),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: SidebarWidget(
+            cephalometricService: CephalometricCanvasService(
+              ImageRepositoryImpl(),
+            ),
+          ),
         ),
       ),
       body: const Center(

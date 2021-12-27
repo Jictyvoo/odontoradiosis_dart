@@ -5,7 +5,7 @@ import 'package:odontoradiosis_core/src/util/scale_manager.dart';
 import 'package:odontoradiosis_core/src/util/string_helper.dart';
 import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
-class LandmarksController {
+class LandmarksController implements AbsLandmarksManagement {
   ILandmarkArray _landmarks;
   final LandmarkRepository _localRepository;
   final ScaleManager _scales;
@@ -24,6 +24,7 @@ class LandmarksController {
   }
 
   /// Set a single landmark value
+  @override
   void setLandmark(String name, [ILandmark value = const ILandmark(0, 0)]) {
     _landmarks[name] = value;
   }
@@ -89,6 +90,7 @@ class LandmarksController {
   }
 
   /// Redraw all landmarks
+  @override
   void redrawLandmarks() {
     // TODO: call setState/redraw
   }

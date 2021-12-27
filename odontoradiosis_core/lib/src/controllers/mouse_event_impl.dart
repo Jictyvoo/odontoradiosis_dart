@@ -8,18 +8,19 @@ import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
 class MouseEventImpl implements MouseEventInteraction {
   final TracingController _tracingController;
-  final ILayeredCanvas _canvasController;
+  final ILayeredCanvas? _canvasController;
   final MainController _controller;
   final OdontoradiosisKeeper _infoKeeper;
   final ScaleManager _scaleManager;
 
+  /// Default constructor that receives all needed information
   const MouseEventImpl(
     this._tracingController,
-    this._canvasController,
     this._controller,
     this._infoKeeper,
-    this._scaleManager,
-  );
+    this._scaleManager, {
+    ILayeredCanvas? layeredCanvas,
+  }) : _canvasController = layeredCanvas;
 
   void _moveBoxVertex(
     final IPointBidimensional currentPosition,
@@ -130,7 +131,7 @@ class MouseEventImpl implements MouseEventInteraction {
   void onMouseMove(final IPointBidimensional currentPosition) {
     if (_infoKeeper.isMouseDown && _infoKeeper.isCurveFunction) {
       /* do drag things */
-      _canvasController.canvasCursor = 'move';
+      _canvasController?.canvasCursor = 'move';
 
       final curveName = _infoKeeper.selectedOptions.curve;
 
@@ -145,7 +146,7 @@ class MouseEventImpl implements MouseEventInteraction {
         _moveInStates(currentPosition, curveName);
       }
     } else if (_infoKeeper.isCurveFunction) {
-      _canvasController.canvasCursor = 'crosshair';
+      _canvasController?.canvasCursor = 'crosshair';
     }
   }
 
@@ -155,7 +156,7 @@ class MouseEventImpl implements MouseEventInteraction {
 
     // Start handling the mouse position
     final curveName = _infoKeeper.selectedOptions.curve;
-    if (curveName.isEmpty || curveName == 'selecione') {
+    if (curveName.isEmpty) {
       _infoKeeper.isCurveFunction = false;
       final landmarkName = _infoKeeper.selectedOptions.landmark;
       _controller.markLandmarkPoint(

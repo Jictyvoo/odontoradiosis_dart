@@ -33,6 +33,7 @@ class OdontoradiosisKeeper {
   bool isCurveFunction;
   ActiveControlOptions selectedOptions;
 
+  /// Default constructor that sets all attributes to its default values
   OdontoradiosisKeeper({
     this.isMouseDown = false,
     this.isInsideBox = false,

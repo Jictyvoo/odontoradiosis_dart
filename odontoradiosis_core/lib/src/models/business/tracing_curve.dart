@@ -3,12 +3,17 @@ import 'dart:math' as math;
 import 'package:odontoradiosis_core/src/util/useful_methods.dart';
 import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
+/// AnatomicalTracingCurve is a class that represents an object
+/// which take some points and the curve name.
+///
+/// Also, this object can do some calculations as the curve box and box vertex.
 class AnatomicalTracingCurve implements ICurveAccess {
   final String _curveName;
   final IBezierPoints _curvePoints;
   List<IPointBidimensional> _boxPoints;
   List<double> _boxDimensions;
 
+  /// Default constructor that needs to receive a name and all points in curve
   AnatomicalTracingCurve(this._curveName, this._curvePoints)
       : _boxPoints = <IPointBidimensional>[],
         _boxDimensions = <double>[];
@@ -103,14 +108,14 @@ class AnatomicalTracingCurve implements ICurveAccess {
   @override
   IPointBidimensional? getPoint(int index) {
     var counter = 0;
-    // TODO: Improve this search, calculate position with index divisor
+    // TODO: Verify if index division is faster than for-loop
     for (final element in points) {
-      for (var subindex = 1; subindex < element.length; subindex += 2) {
+      for (var subIndex = 1; subIndex < element.length; subIndex += 2) {
         counter++;
         if (counter == index) {
           return IPointBidimensional.create(
-            x: element[subindex - 1],
-            y: element[subindex],
+            x: element[subIndex - 1],
+            y: element[subIndex],
           );
         }
       }

@@ -27,10 +27,13 @@ class CephalometricCanvasService {
   }
 
   void init(
-    ILayeredCanvas canvas,
-    MainController mainController,
-  ) {
+    MainController mainController, [
+    ILayeredCanvas? canvas,
+  ]) {
     _mainController = mainController;
+
+    // Sets layer order if canvas was given
+    canvas?.layerOrder = {"image": 0, "bezier": 1, "landmarks": 2};
 
     // After the initialization of the canvas, the loaded image is displayed
     if (_imageInfo.imageData.isNotEmpty) {
@@ -77,45 +80,8 @@ class CephalometricCanvasService {
     );
   }
 
-  /// Adding the semiautomatic landmark indentification feature
-  /*void markSemiautomatic() {
-        final semiautomaticLandmarks =
-            this._semiautomaticLandmarks ??
-            SemiautomaticLandmarks(
-                [
-                    routines.a,
-                    routines.b,
-                    routines.ena,
-                    routines.gnatio,
-                    routines.nasio,
-                    routines.sela,
-                    routines.palatoMole,
-                    routines.porio,
-                    routines.enp,
-                    routines.pogonio,
-                    routines.mento,
-                    routines.gonio,
-                    routines.pterigoide,
-                    routines.orbitale,
-                    routines.proNasal,
-                    routines.condilio,
-                    routines.pogonioMole,
-                    routines.fissuraPterigoMaxilar,
-                ],
-                this._tracingController,
-                this._mainController.landmarksController
-            );
-        if (semiautomaticLandmarks.start()) {
-            this._mainController.landmarksController.saveLandmarks();
-        }
-    }*/
-
   ImageEffects get effectsManager {
     return _imageEffects;
-  }
-
-  IEffectValues get defaultEffectValues {
-    return ImageEffects.defaultValues;
   }
 
   TracingController get tracingController {

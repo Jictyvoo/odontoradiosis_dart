@@ -4,6 +4,4 @@ abstract class AbsLandmarksManagement {
   void redrawLandmarks();
 
   void setLandmark(String name, ILandmark value);
-
-  ILandmarkArray getLandmarks();
 }

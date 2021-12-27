@@ -1,6 +1,6 @@
 import 'package:odontoradiosis_semiautomatic_landmarks/src/models/routine_description.dart';
 
-const fissuraPtergoMaxilar = IRoutineDescription(
+const fissuraPterigoMaxilar = IRoutineDescription(
   landmark: "Fossa Ptérigo Maxilar (Fpm)",
   accessedCurves: ["fissura-pterigomaxilar"],
   instructions: [

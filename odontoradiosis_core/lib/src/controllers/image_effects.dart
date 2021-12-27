@@ -13,6 +13,7 @@ class ImageEffects implements IEffectValues {
   @override
   double invert;
 
+  /// Default values for all supported effects
   static const IEffectValues defaultValues = IEffectValues(
     brightness: 100,
     contrast: 100,
@@ -20,6 +21,7 @@ class ImageEffects implements IEffectValues {
     invert: 0,
   );
 
+  /// Default Constructor that sets all effects values to it default
   ImageEffects()
       : brightness = defaultValues.brightness,
         contrast = defaultValues.contrast,
@@ -38,9 +40,9 @@ class ImageEffects implements IEffectValues {
 
   /// Reset all effects
   void reset() {
-    brightness = 100;
-    contrast = 100;
-    grayscale = 0;
-    invert = 0;
+    brightness = defaultValues.brightness;
+    contrast = defaultValues.contrast;
+    grayscale = defaultValues.grayscale;
+    invert = defaultValues.invert;
   }
 }
