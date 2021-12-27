@@ -5,6 +5,8 @@ import 'package:odontoradiosis/app/widgets/utils/reactive_dropdown_button.dart';
 import 'package:odontoradiosis/core/util/available_effects.dart';
 import 'package:odontoradiosis_core/odontoradiosis_core.dart';
 
+import 'sidebar_header_delegate.dart';
+
 class SidebarWidget extends StatefulWidget {
   final CephalometricCanvasService _cephalometricService;
 
@@ -159,6 +161,7 @@ class _SidebarWidgetState extends State<SidebarWidget> {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
+        SliverPersistentHeader(pinned: true, delegate: SidebarHeaderDelegate()),
         SliverList(
           delegate: SliverChildListDelegate.fixed(_buildSideActions()),
         ),
