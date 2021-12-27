@@ -9,8 +9,8 @@ class SidebarHeaderDelegate extends SliverPersistentHeaderDelegate {
   ) {
     final brightness = Theme.of(context).brightness;
     final imagePath = brightness == Brightness.light
-        ? 'images/odontoradiosis_logo_b.png'
-        : 'images/odontoradiosis_logo.png';
+        ? 'assets/images/odontoradiosis_logo_b.png'
+        : 'assets/images/odontoradiosis_logo.png';
     return LayoutBuilder(
       builder: (context, constraints) {
         return ConstrainedBox(
