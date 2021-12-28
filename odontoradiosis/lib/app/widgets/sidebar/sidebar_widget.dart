@@ -161,9 +161,15 @@ class _SidebarWidgetState extends State<SidebarWidget> {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        SliverPersistentHeader(pinned: true, delegate: SidebarHeaderDelegate()),
-        SliverList(
-          delegate: SliverChildListDelegate.fixed(_buildSideActions()),
+        SliverPersistentHeader(
+          pinned: false,
+          delegate: SidebarHeaderDelegate(),
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          sliver: SliverList(
+            delegate: SliverChildListDelegate.fixed(_buildSideActions()),
+          ),
         ),
         SliverFillRemaining(
           hasScrollBody: false,

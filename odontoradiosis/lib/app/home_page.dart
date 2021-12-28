@@ -4,6 +4,7 @@ import 'package:odontoradiosis_core/odontoradiosis_core.dart';
 import 'package:odontoradiosis_painters/odontoradiosis_painters.dart';
 
 import 'widgets/sidebar/sidebar_widget.dart';
+import 'widgets/toolbar/edition_mode_widget.dart';
 import 'widgets/toolbar/toolbar_widget.dart';
 
 class RadiographyPage extends StatefulWidget {
@@ -26,12 +27,9 @@ class _RadiographyPageState extends State<RadiographyPage> {
         ],
       ),
       drawer: Drawer(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: SidebarWidget(
-            cephalometricService: CephalometricCanvasService(
-              ImageRepositoryImpl(),
-            ),
+        child: SidebarWidget(
+          cephalometricService: CephalometricCanvasService(
+            ImageRepositoryImpl(),
           ),
         ),
       ),
