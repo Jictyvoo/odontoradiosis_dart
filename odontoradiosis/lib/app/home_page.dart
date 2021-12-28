@@ -23,6 +23,7 @@ class _RadiographyPageState extends State<RadiographyPage> {
       appBar: AppBar(
         title: Text(widget.title),
         actions: const [
+          EditionModeButtonWidget(),
           ToolbarWidget(),
         ],
       ),
