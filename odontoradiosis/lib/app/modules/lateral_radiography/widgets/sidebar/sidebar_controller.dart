@@ -3,7 +3,7 @@ import 'package:odontoradiosis_core/odontoradiosis_core.dart';
 
 class SidebarController {
   String _selectedCurve = '';
-  final CephalometricCanvasService _canvasService;
+  final LateralCephalometricService _canvasService;
 
   SidebarController(this._canvasService);
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:odontoradiosis/app/shared/app_routes.dart';
+
+import 'shared/app_routes.dart';
 
 class OdontoradiosisApp extends StatelessWidget {
   const OdontoradiosisApp({Key? key}) : super(key: key);

@@ -10,8 +10,8 @@ class AppModule extends Module {
   @override
   List<Bind> get binds => [
         Bind.factory<ImageRepository>((i) => ImageRepositoryImpl()),
-        Bind.factory<CephalometricCanvasService>(
-          (i) => CephalometricCanvasService(i<ImageRepository>()),
+        Bind.factory<LateralCephalometricService>(
+          (i) => LateralCephalometricService(i<ImageRepository>()),
         ),
       ];
 

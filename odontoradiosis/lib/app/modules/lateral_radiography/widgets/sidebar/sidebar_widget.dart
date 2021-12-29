@@ -8,11 +8,11 @@ import 'sidebar_controller.dart';
 import 'sidebar_header_delegate.dart';
 
 class SidebarWidget extends StatefulWidget {
-  final CephalometricCanvasService _cephalometricService;
+  final LateralCephalometricService _cephalometricService;
 
   const SidebarWidget({
     Key? key,
-    required CephalometricCanvasService cephalometricService,
+    required LateralCephalometricService cephalometricService,
   })  : _cephalometricService = cephalometricService,
         super(key: key);
 

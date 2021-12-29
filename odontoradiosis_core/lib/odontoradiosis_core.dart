@@ -10,13 +10,13 @@ export 'src/controllers/image_effects.dart';
 export 'src/controllers/mouse_event_impl.dart';
 export 'src/models/data/bezier_curves.dart';
 
-class CephalometricCanvasService {
+class LateralCephalometricService {
   late MainController _mainController;
   final ImageEffects _imageEffects;
   final ICanvasImage _imageInfo;
   final ILocalRepository _localRepository;
 
-  CephalometricCanvasService(
+  LateralCephalometricService(
     this._localRepository,
   )   : _imageInfo = ICanvasImage(''),
         _imageEffects = ImageEffects() {

@@ -3,7 +3,7 @@ import 'package:odontoradiosis_semiautomatic_landmarks/odontoradiosis_semiautoma
 import 'package:odontoradiosis_semiautomatic_landmarks/semiautomatic_routines.dart'
     as routines;
 
-mixin SemiautomaticLandmarksService on CephalometricCanvasService {
+mixin SemiautomaticLandmarksService on LateralCephalometricService {
   SemiautomaticLandmarks? _semiautomaticLandmarks;
 
   /// Adding the semiautomatic landmark identification feature

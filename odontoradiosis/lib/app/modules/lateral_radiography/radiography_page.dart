@@ -30,7 +30,7 @@ class _LateralRadiographyPageState extends State<LateralRadiographyPage> {
       ),
       drawer: Drawer(
         child: SidebarWidget(
-          cephalometricService: Modular.get<CephalometricCanvasService>(),
+          cephalometricService: Modular.get<LateralCephalometricService>(),
         ),
       ),
       body: const Center(
