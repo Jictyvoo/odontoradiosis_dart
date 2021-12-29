@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:odontoradiosis/core/infra/repositories/image_repository_impl.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:odontoradiosis_core/odontoradiosis_core.dart';
 import 'package:odontoradiosis_painters/odontoradiosis_painters.dart';
 
@@ -7,16 +7,17 @@ import 'widgets/sidebar/sidebar_widget.dart';
 import 'widgets/toolbar/edition_mode_widget.dart';
 import 'widgets/toolbar/toolbar_widget.dart';
 
-class RadiographyPage extends StatefulWidget {
-  const RadiographyPage({Key? key, required this.title}) : super(key: key);
+class LateralRadiographyPage extends StatefulWidget {
+  const LateralRadiographyPage({Key? key, required this.title})
+      : super(key: key);
 
   final String title;
 
   @override
-  State<RadiographyPage> createState() => _RadiographyPageState();
+  State<LateralRadiographyPage> createState() => _LateralRadiographyPageState();
 }
 
-class _RadiographyPageState extends State<RadiographyPage> {
+class _LateralRadiographyPageState extends State<LateralRadiographyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,9 +30,7 @@ class _RadiographyPageState extends State<RadiographyPage> {
       ),
       drawer: Drawer(
         child: SidebarWidget(
-          cephalometricService: CephalometricCanvasService(
-            ImageRepositoryImpl(),
-          ),
+          cephalometricService: Modular.get<CephalometricCanvasService>(),
         ),
       ),
       body: const Center(

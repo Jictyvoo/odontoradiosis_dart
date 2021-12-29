@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'home_page.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:odontoradiosis/app/shared/app_routes.dart';
 
 class OdontoradiosisApp extends StatelessWidget {
   const OdontoradiosisApp({Key? key}) : super(key: key);
@@ -13,9 +13,7 @@ class OdontoradiosisApp extends StatelessWidget {
       themeMode: ThemeMode.dark,
       theme: ThemeData.light(),
       darkTheme: ThemeData(primarySwatch: Colors.purple),
-      home: const RadiographyPage(
-        title: 'Odontoradiosis',
-      ),
-    );
+      initialRoute: AppRoutes.DEFAULT.route,
+    ).modular();
   }
 }

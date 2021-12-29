@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:odontoradiosis/app/widgets/sidebar/sidebar_controller.dart';
 import 'package:odontoradiosis/app/widgets/utils/footer.dart';
 import 'package:odontoradiosis/app/widgets/utils/reactive_dropdown_button.dart';
 import 'package:odontoradiosis/core/util/available_effects.dart';
 import 'package:odontoradiosis_core/odontoradiosis_core.dart';
 
+import 'sidebar_controller.dart';
 import 'sidebar_header_delegate.dart';
 
 class SidebarWidget extends StatefulWidget {
