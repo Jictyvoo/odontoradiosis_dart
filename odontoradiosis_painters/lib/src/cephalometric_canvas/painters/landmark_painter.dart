@@ -10,8 +10,9 @@ class LandmarkPainter extends CustomPainter {
     final textSpan = TextSpan(
       text: info.name,
       style: TextStyle(
-        color: const Color(0xFF000000),
+        color: const Color(0xFF522929),
         fontSize: _drawInfo.fontSize,
+        fontWeight: FontWeight.bold,
       ),
     );
     final textPainter = TextPainter(
@@ -21,7 +22,7 @@ class LandmarkPainter extends CustomPainter {
     );
     textPainter.layout(
       minWidth: 0,
-      maxWidth: size.width,
+      maxWidth: info.maxTextWidth,
     );
     final offset = Offset(
       info.textPosition.x.floorToDouble(),

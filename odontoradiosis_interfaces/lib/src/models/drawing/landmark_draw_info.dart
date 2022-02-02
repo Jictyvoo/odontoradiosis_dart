@@ -7,12 +7,14 @@ class SpecificLandmarkInfo {
   final ILandmark point;
   final String name;
   final IPointBidimensional textPosition;
+  final double maxTextWidth;
 
   const SpecificLandmarkInfo(
     this.point,
     this.name,
-    this.textPosition,
-  );
+    this.textPosition, {
+    this.maxTextWidth = 50,
+  });
 }
 
 class LandmarkDrawInfo {

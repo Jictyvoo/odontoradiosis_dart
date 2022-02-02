@@ -64,7 +64,7 @@ class _CephalometricCanvasState extends State<CephalometricCanvas> {
             landmarks: [
               SpecificLandmarkInfo(
                 ILandmark.create(x: 50, y: 50),
-                'name',
+                'Espinha nasal anterior (ENA)',
                 const IPointBidimensional(30, 60),
               ),
             ],
