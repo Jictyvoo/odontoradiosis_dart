@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:odontoradiosis/app/widgets/utils/footer.dart';
 import 'package:odontoradiosis/core/util/available_effects.dart';
 import 'package:odontoradiosis_core/odontoradiosis_core.dart';
+import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
 import 'sidebar_controller.dart';
 import 'sidebar_header_delegate.dart';
@@ -54,10 +55,13 @@ class _SidebarWidgetState extends State<SidebarWidget> {
 
   List<Widget> _buildSideActions() {
     return [
-      DropdownButtonFormField<String>(
+      DropdownButtonFormField<TracingCurveDefinition>(
         items: [
           for (final element in _controller.supportedCurves)
-            DropdownMenuItem<String>(value: element, child: Text(element))
+            DropdownMenuItem<TracingCurveDefinition>(
+              value: element,
+              child: Text(element.toString()),
+            )
         ],
         value: _controller.selectedCurve,
         isExpanded: true,
@@ -70,12 +74,15 @@ class _SidebarWidgetState extends State<SidebarWidget> {
           }
         },
       ),
-      DropdownButtonFormField<String>(
+      DropdownButtonFormField<LandmarkDefinition>(
         items: [
           for (final element in _controller.supportedLandmarks)
-            DropdownMenuItem<String>(value: element, child: Text(element))
+            DropdownMenuItem<LandmarkDefinition>(
+              value: element,
+              child: Text(element.toString()),
+            )
         ],
-        value: null,
+        value: _controller.selectedLandmark,
         isExpanded: true,
         decoration: const InputDecoration(label: Text('Landmarks')),
         onChanged: (value) {

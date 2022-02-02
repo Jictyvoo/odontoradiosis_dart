@@ -90,6 +90,10 @@ class MainController {
     layeredCanvas?.canvasCursor = 'crosshair';
   }
 
+  String get landmark {
+    return infoKeeper.selectedOptions.landmark;
+  }
+
   void selectAllCurves([final String curveName = 'all']) {
     infoKeeper.selectedOptions.curve = curveName;
     infoKeeper.selectedOptions.isAllCurves = true;
@@ -97,15 +101,19 @@ class MainController {
     tracingController.drawEntireCurveBox(false);
   }
 
-  void selectCurve(final String curveName) {
+  set selectCurve(final String curveName) {
+    infoKeeper.selectedOptions.curve = curveName;
     if (curveName.isNotEmpty) {
       layeredCanvas?.canvasCursor = 'move';
-      infoKeeper.selectedOptions.curve = curveName;
       infoKeeper.selectedOptions.isAllCurves = false;
       tracingController.drawCurveBox(curveName, true);
       tracingController.drawPointCircle(curveName);
     } else {
       layeredCanvas?.canvasCursor = 'crosshair';
     }
+  }
+
+  String get selectCurve {
+    return infoKeeper.selectedOptions.curve;
   }
 }

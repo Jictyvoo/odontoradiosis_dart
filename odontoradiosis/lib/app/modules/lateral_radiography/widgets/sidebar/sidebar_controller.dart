@@ -1,16 +1,11 @@
 import 'package:odontoradiosis/core/util/supported.dart';
 import 'package:odontoradiosis_core/odontoradiosis_core.dart';
+import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
 class SidebarController {
-  String _selectedCurve = '';
   final LateralCephalometricService _canvasService;
 
   SidebarController(this._canvasService);
-
-  /// Normalize name
-  static String _normalizeTracingName(String toNormalize) {
-    return toNormalize.replaceAll(' ', '-').toLowerCase();
-  }
 
   void undone() {
     final effectsManager = _canvasService.effectsManager;
@@ -22,31 +17,29 @@ class SidebarController {
   }
 
   /// Add Curve canvas event listener
-  void curveSelect(String curveName) {
-    _selectedCurve = curveName;
+  void curveSelect(TracingCurveDefinition curveDefinition) {
     final tracingController = _canvasService.tracingController;
 
     // Make it empty
-    _canvasService.controller.selectCurve('');
+    _canvasService.controller.selectCurve = '';
     tracingController.drawAllCurves();
+    final curveName = curveDefinition.curveName;
     if (curveName != SupportedCephalometric.clearSelection) {
-      final currentCurve = _normalizeTracingName(curveName);
       if (curveName == SupportedCephalometric.allCurves) {
         _canvasService.controller.selectAllCurves(curveName);
       } else {
-        if (tracingController.curveExists(currentCurve)) {
-          _canvasService.controller.selectCurve(currentCurve);
+        if (tracingController.curveExists(curveName)) {
+          _canvasService.controller.selectCurve = curveName;
         }
       }
     }
   }
 
-  void landmarkSelect(String landmarkName) {
+  void landmarkSelect(LandmarkDefinition landmarkDefinition) {
     final tracingController = _canvasService.tracingController;
-    _canvasService.controller.landmark = landmarkName;
-    if (_selectedCurve.isNotEmpty) {
-      _selectedCurve = '';
-      _canvasService.controller.selectCurve('');
+    _canvasService.controller.landmark = landmarkDefinition.toString();
+    if (_canvasService.controller.selectCurve.isNotEmpty) {
+      _canvasService.controller.selectCurve = '';
       tracingController.drawAllCurves();
     }
   }
@@ -74,12 +67,32 @@ class SidebarController {
     //effectsManager.updateFilterValues();
   }
 
-  List<String> get supportedCurves => SupportedCephalometric.supportedCurves;
+  List<TracingCurveDefinition> get supportedCurves =>
+      SupportedCephalometric.supportedCurves;
 
-  List<String> get supportedLandmarks => SupportedCephalometric.supportedPoints;
+  List<LandmarkDefinition> get supportedLandmarks =>
+      SupportedCephalometric.supportedPoints;
 
-  String? get selectedCurve =>
-      _selectedCurve.isNotEmpty ? _selectedCurve : null;
+  // TODO: Remove direct string from controller save
+  TracingCurveDefinition? get selectedCurve {
+    final curveValue = _canvasService.controller.selectCurve;
+    for (final definition in supportedCurves) {
+      if (curveValue == definition.curveName) {
+        return definition;
+      }
+    }
+    return null;
+  }
+
+  LandmarkDefinition? get selectedLandmark {
+    final landmarkValue = _canvasService.controller.landmark;
+    for (final definition in supportedLandmarks) {
+      if (landmarkValue == definition.toString()) {
+        return definition;
+      }
+    }
+    return null;
+  }
 
   double get contrastValue {
     return _canvasService.effectsManager.contrast;
