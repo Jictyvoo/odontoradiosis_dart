@@ -56,23 +56,18 @@ class SidebarController {
     final effectsManager = _canvasService.effectsManager;
     switch (effect) {
       case "grayscale":
-        //effectsManager.grayscale = value ?? 0;
         effectsManager.grayscale = value ?? 0;
         break;
       case "invert":
-        //effectsManager.invert = value ?? 0;
         effectsManager.invert = value ?? 0;
         break;
       case "brightness":
-        //effectsManager.brightness = value ?? 0;
         effectsManager.brightness = value ?? 0;
         break;
       case "contrast":
-        //effectsManager.contrast = value ?? 0;
         effectsManager.contrast = value ?? 0;
         break;
       default:
-        //effectsManager.grayscale = value ?? 0;
         effectsManager.grayscale = value ?? 0;
         break;
     }
