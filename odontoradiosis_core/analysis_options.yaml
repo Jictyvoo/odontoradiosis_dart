@@ -4,6 +4,8 @@ include: package:lints/recommended.yaml
 linter:
   rules:
     - avoid_empty_else
+    - always_declare_return_types
+    - avoid_types_on_closure_parameters
     - cancel_subscriptions
     - camel_case_types
     - hash_and_equals
@@ -14,7 +16,7 @@ linter:
     - prefer_const_declarations
     - prefer_final_locals
     - public_member_api_docs
-    - sized_box_for_whitespace
+    - omit_local_variable_types
     - test_types_in_equals
     - unnecessary_const
     - unnecessary_new
