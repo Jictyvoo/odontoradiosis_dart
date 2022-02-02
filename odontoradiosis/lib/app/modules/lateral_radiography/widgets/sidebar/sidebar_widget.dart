@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:odontoradiosis/app/widgets/utils/footer.dart';
-import 'package:odontoradiosis/app/widgets/utils/reactive_dropdown_button.dart';
 import 'package:odontoradiosis/core/util/available_effects.dart';
 import 'package:odontoradiosis_core/odontoradiosis_core.dart';
 
@@ -55,13 +54,19 @@ class _SidebarWidgetState extends State<SidebarWidget> {
 
   List<Widget> _buildSideActions() {
     return [
-      ReactiveDropdownButton<String>(
-        items: _controller.supportedCurves,
+      DropdownButtonFormField<String>(
+        items: [
+          for (final element in _controller.supportedCurves)
+            DropdownMenuItem<String>(value: element, child: Text(element))
+        ],
+        value: _controller.selectedCurve,
+        isExpanded: true,
         decoration: const InputDecoration(label: Text('Anatomical Tracing')),
-        initialValue: _controller.selectedCurve,
         onChanged: (value) {
           if (value != null) {
-            _controller.curveSelect(value);
+            setState(() {
+              _controller.curveSelect(value);
+            });
           }
         },
       ),
