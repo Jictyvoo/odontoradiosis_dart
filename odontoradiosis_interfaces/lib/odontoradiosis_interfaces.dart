@@ -9,6 +9,9 @@ export 'src/interfaces/controllers/mouse_event_interaction.dart';
 export 'src/interfaces/controllers/tracing_manager.dart';
 export 'src/interfaces/repositories.dart';
 
+// Util
+export 'src/interfaces/util/scales.dart';
+
 // Views - I
 export 'src/interfaces/views/colors.dart';
 export 'src/interfaces/views/layered_canvas.dart';

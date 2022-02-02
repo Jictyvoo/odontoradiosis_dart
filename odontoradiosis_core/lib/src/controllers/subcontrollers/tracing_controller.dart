@@ -4,8 +4,8 @@ import 'dart:math' as math;
 import 'package:odontoradiosis_core/src/models/business/tracing_curve.dart';
 import 'package:odontoradiosis_core/src/models/data/bezier_curves.dart';
 import 'package:odontoradiosis_core/src/models/data/manipulable_point.dart';
+import 'package:odontoradiosis_core/src/models/data/scales.dart';
 import 'package:odontoradiosis_core/src/models/odontoradiosis_keeper.dart';
-import 'package:odontoradiosis_core/src/util/scale_manager.dart';
 import 'package:odontoradiosis_core/src/util/useful_methods.dart';
 import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
@@ -14,14 +14,14 @@ import 'abstract_bezier_controller.dart';
 class TracingController extends AbstractBezierController {
   Map<String, AnatomicalTracingCurve> bezierPoints;
   final TracingRepository _localRepository;
-  final ScaleManager _scales;
+  final ScalesManager<ScaleValues> _scalesManager;
   BoxDimensions? _boxDimensions;
   IBezierPoints? _curvePoints;
 
   /// Constructor
   TracingController(
     this._localRepository,
-    this._scales,
+    this._scalesManager,
   )   : bezierPoints = TracingController._bezierPoints2TracingList(
           DefaultBezierCurve.create(),
         ),
@@ -45,6 +45,10 @@ class TracingController extends AbstractBezierController {
       bezierPoints[entry.key] = entry.value.points;
     }
     return bezierPoints;
+  }
+
+  ScaleValues get _scales {
+    return _scalesManager.values;
   }
 
   /// Bezier points setter
@@ -253,13 +257,13 @@ class TracingController extends AbstractBezierController {
     return null;
   }
 
-  rescaleAllCurves(IPointBidimensional scales) {
+  void rescaleAllCurves(IPointBidimensional scales) {
     for (final curveName in bezierPoints.keys) {
       rescaleBezier(curveName, scales.x, scales.y);
     }
   }
 
-  translateAllCurves(IPointBidimensional movement) {
+  void translateAllCurves(IPointBidimensional movement) {
     for (final curveName in bezierPoints.keys) {
       translateBezier(curveName, movement.x, movement.y);
     }

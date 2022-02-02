@@ -5,6 +5,7 @@ import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 import 'src/controllers/image_effects.dart';
 import 'src/controllers/main_controller.dart';
 import 'src/controllers/subcontrollers/tracing_controller.dart';
+import 'src/util/scale_manager.dart';
 
 export 'src/controllers/image_effects.dart';
 export 'src/controllers/mouse_event_impl.dart';
@@ -39,6 +40,7 @@ class LateralCephalometricService {
           tracingRepository: _tracingRepository,
           landmarkRepository: _landmarkRepository,
           layeredCanvas: canvas,
+          scaleManager: ScaleManagerImpl(),
         );
 
     // Sets layer order if canvas was given

@@ -1,17 +1,22 @@
 import 'dart:convert';
 
 import 'package:odontoradiosis_core/src/models/data/draw_color.dart';
-import 'package:odontoradiosis_core/src/util/scale_manager.dart';
+import 'package:odontoradiosis_core/src/models/data/scales.dart';
 import 'package:odontoradiosis_core/src/util/string_helper.dart';
 import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
 class LandmarksController implements AbsLandmarksManagement {
   ILandmarkArray _landmarks;
   final LandmarkRepository _localRepository;
-  final ScaleManager _scales;
+  final ScalesManager<ScaleValues> _scalesManager;
 
   /// Constructor
-  LandmarksController(this._localRepository, this._scales) : _landmarks = {};
+  LandmarksController(this._localRepository, this._scalesManager)
+      : _landmarks = {};
+
+  ScaleValues get _scales {
+    return _scalesManager.values;
+  }
 
   /// Returns this.landmarks
   ILandmarkArray get landmarks {

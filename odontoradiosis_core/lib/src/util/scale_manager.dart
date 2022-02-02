@@ -1,7 +1,7 @@
 import 'package:odontoradiosis_core/src/models/data/scales.dart';
 import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
-class ScaleManager {
+class ScaleManagerImpl implements ScalesManager<ScaleValues> {
   int pointRadius;
   double lineWidth;
   double nameScale;
@@ -9,14 +9,16 @@ class ScaleManager {
   final ScaleValues scaleDrawValue;
   final IPointBidimensional _scales;
 
+  static const drawScales = ScaleValues(
+    pointRadius: 4,
+    nameScale: 10,
+    lineWidth: 2,
+    textRelativePosition: IPointBidimensional(15, 15),
+  );
+
   /// Default constructor for scale manager, that sets all default scale values
-  ScaleManager([
-    this.scaleDrawValue = const ScaleValues(
-      pointRadius: 4,
-      nameScale: 10,
-      lineWidth: 2,
-      textRelativePosition: IPointBidimensional(15, 15),
-    ),
+  ScaleManagerImpl([
+    this.scaleDrawValue = drawScales,
     this._scales = const IPointBidimensional(0, 0),
   ])  : pointRadius = 4,
         lineWidth = 1,
@@ -24,7 +26,7 @@ class ScaleManager {
         textRelativePosition = IPointBidimensional.create(x: 15, y: 15);
 
   /// Calculate the scale to make canvas dynamic and returns it
-  double dynamicCanvasScale({
+  double _dynamicCanvasScale({
     double valueToResize = 1,
     bool isX = false,
   }) {
@@ -35,46 +37,54 @@ class ScaleManager {
     }
   }
 
-  /// Calculates all scales variables
+  @override
   void calculateScales() {
     final isX = _scales.x > _scales.y;
-    pointRadius = dynamicCanvasScale(
+    pointRadius = _dynamicCanvasScale(
       valueToResize: scaleDrawValue.pointRadius,
       isX: isX,
     ).toInt();
-    nameScale = dynamicCanvasScale(
+    nameScale = _dynamicCanvasScale(
       valueToResize: scaleDrawValue.nameScale,
       isX: isX,
     );
-    lineWidth = dynamicCanvasScale(
+    lineWidth = _dynamicCanvasScale(
       valueToResize: scaleDrawValue.lineWidth,
       isX: isX,
     );
     textRelativePosition = IPointBidimensional.create(
-      x: dynamicCanvasScale(
+      x: _dynamicCanvasScale(
         valueToResize: scaleDrawValue.textRelativePosition.x,
         isX: isX,
       ),
-      y: dynamicCanvasScale(
+      y: _dynamicCanvasScale(
         valueToResize: scaleDrawValue.textRelativePosition.y,
         isX: isX,
       ),
     );
   }
 
-  /// Returns an object containing the relative mouse position in Canvas
+  @override
   IPointBidimensional getMousePos(
     IPointBidimensional point,
   ) {
     return IPointBidimensional.create(
-      x: dynamicCanvasScale(
+      x: _dynamicCanvasScale(
         valueToResize: point.x,
         isX: true,
       ),
-      y: dynamicCanvasScale(
+      y: _dynamicCanvasScale(
         valueToResize: point.y,
         isX: false,
       ),
     );
   }
+
+  @override
+  ScaleValues get values => ScaleValues(
+        pointRadius: pointRadius.toDouble(),
+        nameScale: nameScale,
+        lineWidth: lineWidth,
+        textRelativePosition: textRelativePosition,
+      );
 }

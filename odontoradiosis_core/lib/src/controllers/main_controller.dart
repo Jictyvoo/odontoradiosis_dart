@@ -1,12 +1,12 @@
+import 'package:odontoradiosis_core/src/models/data/scales.dart';
 import 'package:odontoradiosis_core/src/models/odontoradiosis_keeper.dart';
-import 'package:odontoradiosis_core/src/util/scale_manager.dart';
 import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
 import 'subcontrollers/landmarks_controller.dart';
 import 'subcontrollers/tracing_controller.dart';
 
 class MainController {
-  ScaleManager scaleManager;
+  ScalesManager<ScaleValues> scaleManager;
   final TracingController tracingController;
   final LandmarksController landmarksController;
   final OdontoradiosisKeeper infoKeeper;
@@ -14,7 +14,7 @@ class MainController {
 
   /// Constructor
   MainController({
-    this.scaleManager,
+    required this.scaleManager,
     OdontoradiosisKeeper? infoKeeper,
     required TracingRepository tracingRepository,
     required LandmarkRepository landmarkRepository,

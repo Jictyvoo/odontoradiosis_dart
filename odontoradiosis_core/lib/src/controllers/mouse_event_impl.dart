@@ -2,7 +2,6 @@ import 'package:odontoradiosis_core/src/controllers/main_controller.dart';
 import 'package:odontoradiosis_core/src/controllers/subcontrollers/tracing_controller.dart';
 import 'package:odontoradiosis_core/src/models/data/manipulable_point.dart';
 import 'package:odontoradiosis_core/src/models/odontoradiosis_keeper.dart';
-import 'package:odontoradiosis_core/src/util/scale_manager.dart';
 import 'package:odontoradiosis_core/src/util/useful_methods.dart';
 import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
@@ -11,7 +10,7 @@ class MouseEventImpl implements MouseEventInteraction {
   final ILayeredCanvas? _canvasController;
   final MainController _controller;
   final OdontoradiosisKeeper _infoKeeper;
-  final ScaleManager _scaleManager;
+  final ScalesManager _scaleManager;
 
   /// Default constructor that receives all needed information
   const MouseEventImpl(
