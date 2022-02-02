@@ -9,4 +9,10 @@ class CustomLateralCephalometricService extends LateralCephalometricService
     TracingRepository tracingRepository,
     LandmarkRepository landmarkRepository,
   ) : super(imageRepository, tracingRepository, landmarkRepository);
+
+  @override
+  void loadImage(String imageData) {
+    clearSemiautomaticLandmarks();
+    super.loadImage(imageData);
+  }
 }

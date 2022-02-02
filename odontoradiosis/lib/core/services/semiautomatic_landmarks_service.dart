@@ -6,6 +6,10 @@ import 'package:odontoradiosis_semiautomatic_landmarks/semiautomatic_routines.da
 mixin SemiautomaticLandmarksService on LateralCephalometricService {
   SemiautomaticLandmarks? _semiautomaticLandmarks;
 
+  void clearSemiautomaticLandmarks() {
+    _semiautomaticLandmarks = null;
+  }
+
   /// Adding the semiautomatic landmark identification feature
   void markSemiautomatic() {
     final semiautomaticLandmarks = _semiautomaticLandmarks ??

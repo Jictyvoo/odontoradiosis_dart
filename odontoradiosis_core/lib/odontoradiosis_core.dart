@@ -62,13 +62,13 @@ class LateralCephalometricService {
       _mainController.saveAll();
     }
 
+    // FIXME: Load image on canvas
     _imageEffects.reset();
   }
 
   void loadImage(String imageData) {
     _imageInfo.imageData = imageData;
     _imageInfo.isFromStorage = false;
-    // TODO: Add this line to child classes _semiautomaticLandmarks = null;
     // save the image data on local storage
     _imageRepository.set(EStorageKey.IMAGE_DATA.name, imageData);
     if (_imageInfo.isLoaded) {
