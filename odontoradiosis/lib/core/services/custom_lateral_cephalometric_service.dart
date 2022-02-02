@@ -4,6 +4,9 @@ import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
 class CustomLateralCephalometricService extends LateralCephalometricService
     with SemiautomaticLandmarksService {
-  CustomLateralCephalometricService(ImageRepository localRepository)
-      : super(localRepository);
+  CustomLateralCephalometricService(
+    ImageRepository imageRepository,
+    TracingRepository tracingRepository,
+    LandmarkRepository landmarkRepository,
+  ) : super(imageRepository, tracingRepository, landmarkRepository);
 }

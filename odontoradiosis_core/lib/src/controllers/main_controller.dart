@@ -7,19 +7,20 @@ import 'subcontrollers/tracing_controller.dart';
 
 class MainController {
   ScaleManager scaleManager;
-  TracingController tracingController;
-  LandmarksController landmarksController;
-  OdontoradiosisKeeper infoKeeper;
+  final TracingController tracingController;
+  final LandmarksController landmarksController;
+  final OdontoradiosisKeeper infoKeeper;
   ILayeredCanvas? layeredCanvas;
 
   /// Constructor
-  MainController(
+  MainController({
     this.scaleManager,
-    this.infoKeeper, {
+    OdontoradiosisKeeper? infoKeeper,
     required TracingRepository tracingRepository,
     required LandmarkRepository landmarkRepository,
     this.layeredCanvas,
-  })  : tracingController = TracingController(
+  })  : infoKeeper = infoKeeper ?? OdontoradiosisKeeper(),
+        tracingController = TracingController(
           tracingRepository,
           scaleManager,
         ),

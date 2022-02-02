@@ -14,23 +14,32 @@ class LateralCephalometricService {
   late MainController _mainController;
   final ImageEffects _imageEffects;
   final ICanvasImage _imageInfo;
-  final ILocalRepository _localRepository;
+  final ImageRepository _imageRepository;
+  final TracingRepository _tracingRepository;
+  final LandmarkRepository _landmarkRepository;
 
   LateralCephalometricService(
-    this._localRepository,
+    this._imageRepository,
+    this._tracingRepository,
+    this._landmarkRepository,
   )   : _imageInfo = ICanvasImage(''),
         _imageEffects = ImageEffects() {
-    final imageData = _localRepository.get(EStorageKey.IMAGE_DATA.name);
+    final imageData = _imageRepository.get(EStorageKey.IMAGE_DATA.name);
     _imageInfo.imageData = imageData ?? '';
     _imageInfo.isLoaded = false;
     _imageInfo.isFromStorage = imageData?.isNotEmpty ?? false;
   }
 
-  void init(
-    MainController mainController, [
+  void init([
+    MainController? mainController,
     ILayeredCanvas? canvas,
   ]) {
-    _mainController = mainController;
+    _mainController = mainController ??
+        MainController(
+          tracingRepository: _tracingRepository,
+          landmarkRepository: _landmarkRepository,
+          layeredCanvas: canvas,
+        );
 
     // Sets layer order if canvas was given
     canvas?.layerOrder = {"image": 0, "bezier": 1, "landmarks": 2};
@@ -59,15 +68,15 @@ class LateralCephalometricService {
     _imageInfo.isFromStorage = false;
     // TODO: Add this line to child classes _semiautomaticLandmarks = null;
     // save the image data on local storage
-    _localRepository.set(EStorageKey.IMAGE_DATA.name, imageData);
+    _imageRepository.set(EStorageKey.IMAGE_DATA.name, imageData);
     if (_imageInfo.isLoaded) {
       openImageOnCanvas(imageData);
     }
   }
 
   void loadExportedData(IExportableData exportedData) {
-    _localRepository.set(EStorageKey.LANDMARKS.name, exportedData.landmarks);
-    _localRepository.set(EStorageKey.BEZIER_CURVES.name, exportedData.curves);
+    _landmarkRepository.set(EStorageKey.LANDMARKS.name, exportedData.landmarks);
+    _tracingRepository.set(EStorageKey.BEZIER_CURVES.name, exportedData.curves);
     loadImage(exportedData.imageData);
     _imageInfo.isFromStorage = true;
   }

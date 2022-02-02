@@ -19,6 +19,12 @@ class LateralRadiographyPage extends StatefulWidget {
 
 class _LateralRadiographyPageState extends State<LateralRadiographyPage> {
   @override
+  void initState() {
+    Modular.get<LateralCephalometricService>().init();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
