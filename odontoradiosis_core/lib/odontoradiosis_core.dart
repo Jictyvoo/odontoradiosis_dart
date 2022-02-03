@@ -1,5 +1,6 @@
 library odontoradiosis_core;
 
+import 'package:odontoradiosis_core/src/controllers/mouse_event_impl.dart';
 import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
 
 import 'src/controllers/image_effects.dart';
@@ -101,6 +102,15 @@ class LateralCephalometricService {
 
   MainController get controller {
     return _mainController;
+  }
+
+  MouseEventInteraction get mouseEvents {
+    return MouseEventImpl(
+      tracingController,
+      controller,
+      _mainController.infoKeeper,
+      _mainController.scaleManager,
+    );
   }
 
   bool get isImageOpened {

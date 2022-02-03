@@ -28,6 +28,11 @@ class _LateralRadiographyPageState extends State<LateralRadiographyPage> {
     super.initState();
   }
 
+  /// TODO: Create a controller for this page
+  LateralCephalometricService get _service {
+    return Modular.get<LateralCephalometricService>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,6 +66,7 @@ class _LateralRadiographyPageState extends State<LateralRadiographyPage> {
           imageDrawInfo: ImageDrawInfo(
             base64Decode(testImage),
           ),
+          mouseEvent: _service.mouseEvents,
         ),
       ),
     );

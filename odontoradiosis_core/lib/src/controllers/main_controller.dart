@@ -75,11 +75,12 @@ class MainController {
         point,
       );
       landmarksController.setLandmark(
-          landmarkName,
-          ILandmark.create(
-            x: currentMousePosition.x,
-            y: currentMousePosition.y,
-          ));
+        landmarkName,
+        ILandmark.create(
+          x: currentMousePosition.x,
+          y: currentMousePosition.y,
+        ),
+      );
 
       landmarksController.saveLandmarks();
       landmarksController.redrawLandmarks();
