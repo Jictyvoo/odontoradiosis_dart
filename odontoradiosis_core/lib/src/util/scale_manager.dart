@@ -19,7 +19,7 @@ class ScaleManagerImpl implements ScalesManager<ScaleValues> {
   /// Default constructor for scale manager, that sets all default scale values
   ScaleManagerImpl([
     this.scaleDrawValue = drawScales,
-    this._scales = const IPointBidimensional(0, 0),
+    this._scales = const IPointBidimensional(1, 1),
   ])  : pointRadius = 4,
         lineWidth = 1,
         nameScale = 10,

@@ -10,6 +10,7 @@ abstract class ICurveAccess {
   IPointBidimensional? getPoint(int index);
 }
 
+// TODO: Create factories to types
 typedef ITracingCurves = Map<String, IBezierPoints>;
 
 typedef ITracingBezierList = List<IBezierPoints>;
