@@ -13,10 +13,6 @@ dependencies:
 
   odontoradiosis_interfaces:
     path: ../odontoradiosis_interfaces
-  odontoradiosis_core:
-    path: ../odontoradiosis_core
-  odontoradiosis_semiautomatic_landmarks:
-    path: ../odontoradiosis_semiautomatic_landmarks
 
 dev_dependencies:
   flutter_test:

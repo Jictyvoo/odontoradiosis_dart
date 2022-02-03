@@ -1,18 +1,24 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:odontoradiosis_core/odontoradiosis_core.dart';
 import 'package:odontoradiosis_interfaces/odontoradiosis_interfaces.dart';
-import 'package:odontoradiosis_painters/src/canvases/test_image.dart';
 
 import 'cephalometric_painter.dart';
 
 class CephalometricCanvas extends StatefulWidget {
   final MouseEventInteraction? mouseEvent;
+  final TracingDrawInfo tracingDrawInfo;
+  final LandmarkDrawInfo landmarkDrawInfo;
+  final ImageDrawInfo imageDrawInfo;
 
-  const CephalometricCanvas({Key? key, this.mouseEvent}) : super(key: key);
+  const CephalometricCanvas({
+    Key? key,
+    this.mouseEvent,
+    required this.tracingDrawInfo,
+    required this.landmarkDrawInfo,
+    required this.imageDrawInfo,
+  }) : super(key: key);
 
   @override
   _CephalometricCanvasState createState() => _CephalometricCanvasState();
@@ -29,7 +35,7 @@ class _CephalometricCanvasState extends State<CephalometricCanvas> {
   Future<void> openImage([VoidCallbackFunction? loadFunction]) async {
     final completer = Completer<void>();
     // await Future.delayed(const Duration(seconds: 5));
-    ui.decodeImageFromList(base64Decode(testImage), (result) {
+    ui.decodeImageFromList(widget.imageDrawInfo.imageData, (result) {
       _image = result;
       if (loadFunction != null) {
         loadFunction();
@@ -51,28 +57,27 @@ class _CephalometricCanvasState extends State<CephalometricCanvas> {
         );
         print('${details.globalPosition} - ${details.localPosition}');
       },
+      onTapUp: (details) {
+        print(details);
+        widget.mouseEvent?.onMouseUp();
+      },
       onPanUpdate: (details) {
         print(details.delta);
       },
-      child: CustomPaint(
-        foregroundPainter: CephalometricPainter(
-          TracingDrawInfo(
-            DefaultBezierCurve.create().values.toList(),
-            curvePoints: DefaultBezierCurve.create().values.toList().first,
-          ),
-          LandmarkDrawInfo(
-            landmarks: [
-              SpecificLandmarkInfo(
-                ILandmark.create(x: 50, y: 50),
-                'Espinha nasal anterior (ENA)',
-                const IPointBidimensional(30, 60),
-              ),
-            ],
-          ),
-          ImageDrawInfo(base64Decode(testImage)),
-          _image,
+      child: DecoratedBox(
+        // FIXME: Needed to use decorated box because gesture detector was not working
+        decoration: BoxDecoration(
+          border: Border.all(color: const Color(0x00ffffff)),
         ),
-        child: const SizedBox.expand(),
+        child: CustomPaint(
+          foregroundPainter: CephalometricPainter(
+            widget.tracingDrawInfo,
+            widget.landmarkDrawInfo,
+            widget.imageDrawInfo,
+            _image,
+          ),
+          child: const SizedBox.expand(),
+        ),
       ),
     );
   }
@@ -86,8 +91,15 @@ class _CephalometricCanvasState extends State<CephalometricCanvas> {
           case ConnectionState.done:
             return _buildMainCanvas();
           default:
-            return const Center(
-              child: CircularProgressIndicator(),
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  CircularProgressIndicator(),
+                  SizedBox(height: 8),
+                  Text('Loading radiography image'),
+                ],
+              ),
             );
         }
       },
